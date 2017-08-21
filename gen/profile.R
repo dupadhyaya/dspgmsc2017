@@ -21,3 +21,7 @@ file.edit(file.path("E:/Program Files/R/R-3.4.1/etc/","Rprofile.site"))
 
 Sys.getenv("R_LIBS_USER")
 Sys.getenv()
+help("environment variables")
+
+
+
