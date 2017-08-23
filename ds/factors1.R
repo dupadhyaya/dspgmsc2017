@@ -150,3 +150,28 @@ df <- as.data.frame(l)
 df
 str(df)
 str(drop.levels(df, reorder = F))
+
+
+#Eg1
+head(airquality)
+summary(airquality$Month)
+#Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     5.00    6.00    7.00    6.99    8.00    9.00
+as.factor(airquality$Month)
+airquality$Month
+aq <- transform(airquality, Month = factor(Month, levels=c(5:9), labels = month.abb[5:9]))
+head(aq)
+aq
+summary(aq$Month)
+#May Jun Jul Aug Sep   31  30  31  31  30
+aq <- subset(aq, Month != "Jul")
+summary(aq$Month)
+#May Jun Jul Aug Sep   31  30  31  31  30
+table(aq$Month)
+aq
+str(aq) # 5 Levels
+str(droplevels(aq)) # 4 levels
+#May Jun Jul Aug Sep   31  30   0  31  30 (Jul level exists but no value)
+table(droplevels(aq)$Month)
+#May Jun Aug Sep   31  30  31  30
+droplevels(aq)$Month
+#Levels: May Jun Aug Sep
