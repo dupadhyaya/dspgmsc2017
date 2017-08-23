@@ -6,5 +6,5 @@ tableretage = table(retage)
 names(tableretage)
 df = data.frame(tableretage)
 df
-hist(tableretage)
+
 
