@@ -1,27 +1,32 @@
 # Arrays
 # 2 states ; Each State has 3 districts : Each District has 4 cities
-state = c('state1', 'state2')
-district = c('district1','district2', 'district3')
-city = c('city1', 'city2', 'city3', 'city4')
-pincode = 101:124
-citylist = array(pincode, c(4,3,2) , dimnames = list(city, district ,state))
-citylist
-colnames(citylist)
-rownames(citylist)
-dimnames(citylist)
-length(citylist)
-nrow(citylist)
-ncol(citylist)
-dim(citylist)
-class(citylist)
+company = c('coy1', 'coy2')
+department = c('dept1','dept2', 'dept3')
+salesman = c('salesman1', 'salesman2', 'salesman3', 'salesman4')
+set.seed(1234)
+sales  = ceiling(runif(2*3*4,50,100))
+cat(sales)
+sales; length(sales)
+salesarray = array(sales, c(4,3,2) , dimnames = list(salesman,department,company))
+salesarray
+colnames(salesarray)
+rownames(salesarray)
 
-citylist[3,2,1]
-citylist[1,1,1] # city1, district1, state1, 
-citylist[1,,] # city1 of all states & district
-citylist[,,1] # State1
+dimnames(salesarray)
+length(salesarray)
+nrow(salesarray)
+ncol(salesarray)
+dim(salesarray)
+class(salesarray)
 
-apply(citylist, c(1), sum)  # citywise
-apply(citylist, c(2), sum)  # districtwise
-apply(citylist, c(3), sum) # statewise
-apply(citylist, c(2,3), sum) # all cities - district & statewise
-apply(citylist, c(1,2,3), length) # statewise
+salesarray[3,2,1]
+salesarray[1,1,1] # salesman1, dept1, coy1, 
+salesarray[1,,] # salesman1 of all dept & copy
+salesarray[,,1] # coy1
+
+apply(salesarray, c(1), sum)  # salesman wise
+apply(salesarray, c(2), sum)  # deptwise
+apply(salesarray, c(3), sum) # coywise
+apply(salesarray, c(2,3), sum) # all salesman - dept & coywise
+apply(salesarray, c(1,2,3), length) # coywise = numbers
+

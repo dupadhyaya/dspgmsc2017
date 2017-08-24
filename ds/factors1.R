@@ -2,12 +2,17 @@
 # 
 #nominal
 diabetes = c('Type1','Type2','Type1','Type1')
+cat(diabetes)
 gender = c( 1,2,1,1,2) # 1-M, 2-F
+cat(gender)
 #ordinal
 clsposn = c(1 , 2 , 3 , 1)
+cat(clsposn)
 status = c('Poor','Improved', 'Excellent', 'Improved')
+cat(status)
 
 diabetes ; gender ; clsposn ; status
+# Type of Objects
 class(diabetes) ; class(gender) ; class(clsposn) ; class(status)
 
 # order of values don't matter
@@ -18,6 +23,7 @@ summary(fdiabetes)
 summary(diabetes)
 
 # add another Type; converts into character
+fdiabetes
 fdiabetes = c(fdiabetes, 'Type3')
 fdiabetes
 class(fdiabetes)
@@ -32,12 +38,12 @@ fdiabetes
 levels(fdiabetes)[5] = 'Type5'
 fdiabetes
 summary(fdiabetes)
-fdiabetes[4] = c('Type3')
+fdiabetes[4] = c('Type3')  # add another Element
 fdiabetes
 fdiabetes[5] = c('Type6')  # Invalid as Type6 is not a level
-fdiabetes
+fdiabetes    # convert 5th element to NA
 fdiabetes[1] = c('Type6') # Invalid changing an existing value to non existent level
-fdiabetes
+fdiabetes    # 1st element made NA
 #NA created
 #
 sum (is.na (fdiabetes))  
