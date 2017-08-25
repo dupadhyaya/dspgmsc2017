@@ -28,8 +28,16 @@ x3
 range(x3)
 # Divide range into step of 15 ie 10 levels
 breaks = seq(0,150,by=15)
+breaks
+x3[1] = 60
+x3[2] = 75
 x3.cut = cut(x3, breaks)
+x3.cut = cut(x3, breaks, labels=letters[1:10])
+x3.cut = cut(x3, breaks, labels=letters[1:length(breaks)])
+
+length(breaks)
 x3.cut
+?cut
 x3a = table(x3.cut)
 x3a
 x3b = cbind(x3a)
