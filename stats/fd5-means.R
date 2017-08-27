@@ -26,6 +26,9 @@ IQR(marks)
 quantile(marks, c(.25,.75))
 (iqr = quantile(marks, .75) - quantile(marks,.25))
 
+summary(marks)
+
+
 # Discrete Data
 
 #marks2 = scan()
