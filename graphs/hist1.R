@@ -16,3 +16,4 @@ hist(duration,    # apply the hist function
          col=colors,     # set the color palette 
          main="Old Faithful Eruptions", # the main title 
           xlab="Duration minutes")       # x-axis label
+
