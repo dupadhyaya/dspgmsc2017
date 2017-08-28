@@ -162,3 +162,7 @@ paste(1:5)
 paste(1:5, collapse='')
 toString(1:5)
 noquote(as.character(1:5))
+
+
+# extras
+prettyNum(c(123,1234),big.mark=",")
