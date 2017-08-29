@@ -2,6 +2,7 @@
 # 
 #nominal
 diabetes = c('Type1','Type2','Type1','Type1')
+diabetes
 cat(diabetes)
 gender = c( 1,2,1,1,2) # 1-M, 2-F
 cat(gender)
@@ -31,14 +32,15 @@ class(fdiabetes)
 # Add another Level Properly
 fdiabetes = factor(diabetes)
 levels(fdiabetes)
-fdiabetes = factor(fdiabetes, levels = c(levels(fdiabetes), 'Type3'))
+fdiabetes = factor(fdiabetes, levels =
+                     c(levels(fdiabetes), 'Type3'))
 fdiabetes
 levels(fdiabetes) = c(levels(fdiabetes),'Type4')
 fdiabetes
 levels(fdiabetes)[5] = 'Type5'
 fdiabetes
 summary(fdiabetes)
-fdiabetes[4] = c('Type3')  # add another Element
+fdiabetes[4] = 'Type4'  # add another Element
 fdiabetes
 fdiabetes[5] = c('Type6')  # Invalid as Type6 is not a level
 fdiabetes    # convert 5th element to NA
@@ -47,6 +49,7 @@ fdiabetes    # 1st element made NA
 #NA created
 #
 sum (is.na (fdiabetes))  
+table(fdiabetes)
 table (fdiabetes, exclude=NULL)
 table (fdiabetes, exclude=NA)
 
@@ -67,11 +70,16 @@ fdiabetes
 
 table(fdiabetes)
 droplevels(table(fdiabetes))
+
+
 # 1-M, 2-F
 gender = c( 1,2,1,1,2)
+fgender = factor(gender)
+fgender
 fgender = factor(gender, levels=c(1,2),
                  labels=c('M', 'F') )
-gender ; fgender
+gender
+fgender
 
 head(airquality)
 aq <- transform(airquality, Month = factor(Month, labels = month.abb[5:9]))
@@ -104,10 +112,8 @@ summary(clsposn)
 mode(clsposn)
 fclsposn = factor(clsposn)
 fclsposn
-
 summary(fclsposn)
 levels(fclsposn)
-
 fclsposn2 = factor(clsposn, levels=c(1,2,3,4,5), ordered=T, 
                    labels=c('First','Second','Third','Fourth', 'Fifth'))
 fclsposn2
@@ -118,7 +124,7 @@ levels(fclsposn2)
 fclsposn3 = factor(fclsposn2,levels(fclsposn2)[c(5,3,4,2,1)])
 fclsposn3
 print(levels(fclsposn3))
-
+rev(levels(fclsposn2))
 fclsposn2
 fclsposn4 <- factor(fclsposn2, levels=rev(levels(fclsposn2)))
 fclsposn4
