@@ -36,3 +36,14 @@ str(student1)
 s1 = student1[,c('br', 'city','java','dbms', 'dwm','vlsi', 'cpp', 'cbnst')]
 str(s1)
 student1[,c(15:22)]
+
+
+
+# listing Objects
+ls(pattern='mt*')
+ls()
+ls(pattern='x')  # contains x
+rm(x)
+ls(pattern='x')  # contains x
+rm(x1)
+ls()
