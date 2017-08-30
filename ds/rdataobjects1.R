@@ -13,6 +13,7 @@ save.image(file='dudata1.RData')  # save all objects
 name = c('dhiraj', 'upadhyaya')
 write(name, file='./ds/name.txt')
 
+
 #write to csv files - seperate
 #write.csv(data, file='abc.csv')
 
@@ -20,6 +21,12 @@ write(name, file='./ds/name.txt')
 # remove all objects
 rm(list=ls())  # remove
 ls()  # check
+
 #Loading files
 getwd()
-load(file='dudata1.RData')
+load(file='dudata1.RData')  # 3 objects
+ls()
+rm(list=ls())  # remove
+ls()
+load(file='dudata.RData')  # only 2 objects
+ls()
