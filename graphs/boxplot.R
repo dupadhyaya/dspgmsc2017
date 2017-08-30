@@ -61,3 +61,4 @@ text(x=1.25, y=summary(data), labels = summary(data), col='red', cex=.5)
 
 text(x=1, y=c(min(data)-.01, max(data)+.01), 
      labels = c('Outliers - Low', 'Outliers - High'), col='red', cex=.5)
+
