@@ -18,3 +18,7 @@ hist(mtcars$mpg)
 
 par(mar = c(4,3,2,1))
 hist(mtcars$mpg)
+
+plot.new()
+windows() 
+hist(mtcars$mpg)
