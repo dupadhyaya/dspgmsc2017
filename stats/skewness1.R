@@ -74,3 +74,10 @@ skewness(pdata)
 # all 3 together
 timeSeries::colSkewness(cbind(ndata,data,pdata), na.rm = FALSE)
 
+library(asbio)
+asbio::skew(x)
+
+exp<-rexp(10000)
+exp
+skew(exp)
+kurt(exp)

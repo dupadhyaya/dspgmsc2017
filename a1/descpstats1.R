@@ -20,6 +20,12 @@ sort(table(x))
 sort(table(x), decreasing =T)
 sort(table(x), decreasing =T)[1]
 
+#Sample & Population
+(x1 = sample(x, 10, replace=F))
+?sample
+mean(x1) ; mean(x)
+sd(x1) ; sd(x)
+
 #Mode - Method2
 library(modeest)
 ?mlv
@@ -34,18 +40,29 @@ hist(x)
 hist(x, breaks=12)
 hist(x, breaks=5)
 hist(x)
-rug(x, ticksize = 0.03, side = 1, lwd = 0.5, col = par("fg"))
+#rug(x, ticksize = 0.03, side = 1, lwd = 0.5, col = par("fg"))
 rug(x, ticksize = 0.03, side = 1, lwd = 0.5, col = 'red')
 
 # Histogram with lines showing distribution
-hist(x, freq=F)
-lines(density(x))
+par(mar=c(3,3,4,3)) # setting margins - bottom, left, top, right
+hist(x, freq=F) # histogram without freq values
+lines(density(x))  # density 
+
+hist(x, freq=F, ylim=c(0, max(density(x)$y)))  
+lines(density(x)) # full plot is visible 
 
 
 #Density
 density(x)
 ?density
 plot(density(x))
+par(mfrow=c(2,2))
+# More bins - smoother curve
+for (i in (1:4)) {
+  hist(x, breaks=5*i)
+}
+par(opar)
+
 
 # relative Freq
 
