@@ -39,3 +39,29 @@ sdata2
 
 #sdata3
 sdata3 = data.frame()
+
+
+#sdatamat1
+rollno = c(17010,17045,17012,17087,17057,17056,17032,17084,17078,17018,17013)
+sname = c('Achal Kumar','Apoorva Karn','Goldie Sahni','Hitesh Mann','Kaustav Chatterjee','Meena Srisha Valavala','Rashmi Ranjan Mangaraj','Shruti Sinha','Shubham Pujan','Vijay Pal Singh','Lalit Sahni')
+strsplit(name," ")[1:11][1]
+
+course =  c('PGDDS','PGDDS','PGDDS','PGDDS','MSCDS','PGDDS','MSCDS','PGDDS','PGDDS','PGDDS','PGDDS')
+gender = c('M','F','M','M','M','F','M','F','M','M','M')
+
+
+
+#--------
+## with 
+with(sdata, table(course, hostel, dnn=c('Course', 'Hostel')))
+
+(firstname = sapply(strsplit(sname, ' '), function(x) x[1]))
+
+# Contingency table with Matrix
+excel = ceiling(rnorm(11,7,2))
+sql = ceiling(rnorm(11,7,2))
+rpgm = ceiling(rnorm(11,7,2))
+smarks = matrix(c(excel, sql, rpgm), byrow=F, ncol=3,
+                dimnames = list(firstname, c('excel', 'sql','rpgm')))
+
+smarks
