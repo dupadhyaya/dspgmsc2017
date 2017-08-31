@@ -28,14 +28,15 @@ mlv(x,  method = "mfv")
 ##Graphs
 
 #Histogram
-#layout(matrix(1,1))
+layout(matrix(1,1))
 par(opar)
 hist(x)
 hist(x, breaks=12)
 hist(x, breaks=5)
 hist(x)
-rug(x, ticksize = 0.03, side = 1, lwd = 0.5, col = par("fg"),
-    quiet = getOption("warn") < 0)
+rug(x, ticksize = 0.03, side = 1, lwd = 0.5, col = par("fg"))
+rug(x, ticksize = 0.03, side = 1, lwd = 0.5, col = 'red')
+
 # Histogram with lines showing distribution
 hist(x, freq=F)
 lines(density(x))
