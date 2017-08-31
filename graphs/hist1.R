@@ -1,4 +1,12 @@
 #hist1 histogram
+#There are many ways to plot histograms in R:
+#the hist function in the base graphics package;
+#truehist in package MASS;
+#histogram in package lattice;
+#geom_histogram in package ggplot2.
+
+
+
 
 #Eg1
 duration = faithful$eruptions 
