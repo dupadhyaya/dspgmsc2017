@@ -2,7 +2,7 @@
 
 student = read.csv("./data/student.csv")
 str(student)
-names(student)
+names(student)  #26 columns
 # [1] "rollno"     "sname"      "feepaid"    "gender"     "cat"        "dob"       
 # [7] "age"        "class10"    "class12"    "sem1"       "sem2"       "attnd"     
 # [13] "batch"      "batchyr"    "br"         "city"       "java"       "dbms"      
@@ -18,7 +18,7 @@ student = read.csv("./data/student.csv" , row.names = 1)
 head(student)[1:5]
 str(student)
 dim(student)
-row.names(student) == 102001 # check for particular rowname/rollno
+#row.names(student) == 102001 # check for particular rowname/rollno
 
 colcls = c(NA,'character','numeric','factor', 'factor', rep('NULL',21))
 student = read.csv("./data/student.csv" , colClasses = colcls)
@@ -26,6 +26,7 @@ dim(student)
 head(student)
 str(student)
 
+#ignore error from following line
 setAs("character","myDate", function(from) as.Date(from, format="%d-%b-%y") )
 #ignore error from above line output
 colcls = c(NA,'character','integer','factor', 'factor', 'myDate', 
@@ -48,10 +49,16 @@ colcls = c(NA,'character','integer','factor', 'factor', 'myDate',
 student <- read.csv("./data/student.csv", colClasses=colcls, header=T)
 str(student)
 head(student)
+
 summary(student)
+rownames(student) = student$rollno
+head(student[1:4])  # u may remove rollnos
+
 student$br = trimws(student$br, which = c("both", "left", "right"))
 student$br = factor(student$br)
 head(student)
+
+
 
 # save only DF student
 saveRDS(student, "student1.rds")
