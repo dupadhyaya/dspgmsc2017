@@ -1,8 +1,15 @@
 #cut
+?cut  # divides the range of x into intervals & codes the values in x 
+# according to which interval they fall
+cut(x, breaks, labels = NULL,
+    include.lowest = FALSE, right = TRUE, dig.lab = 3,
+    ordered_result = FALSE, ...)
 
-set.seet(1234)
-marks = ceiling(rnorm(100,50,10))
+
+set.seed(1234)
+marks = ceiling(rnorm(100,60,15))
 marks
+mean(marks)
 range(marks)
 (bks = seq(20,80,1))
 (bks = seq(20,80,5))  # 12 interval
@@ -19,11 +26,7 @@ head(marks)
 table(classint)  # Freq Table
 cbind(table(classint)) # column format view 
 
-?cut  # divides the range of x into intervals & codes the values in x 
-# according to which interval they fall
-cut(x, breaks, labels = NULL,
-    include.lowest = FALSE, right = TRUE, dig.lab = 3,
-    ordered_result = FALSE, ...)
+
 # without giving manual breaks
 cut(marks, breaks=6)
 #(23.9-32.5] - not a clean break
@@ -37,6 +40,7 @@ cut(marks, breaks=6)
 # 
 # 0 2 5 5.1 10  : x[i] = 10 when right=T (5-10]
 x1 = c(0,2,5.1,3,10,14.5, 15,16,20)
+x1
 cut(x1,breaks=4, include.lowest=T )  # not good
 #Levels: [-0.02,5] (5,10] (10,15] (15,20]
 
@@ -137,3 +141,82 @@ c2 <- cut(as.numeric(as.character(clinical.trial$year.enroll)),
               breaks = 3)
 table(c2)
 c2
+
+
+
+# Missing values due to close on Right or Left
+set.seed(1234)
+
+marks = ceiling(rnorm(100,60,15))
+marks
+mean(marks)
+range(marks)
+table(marks)
+marks[c(1,2,3,4,5)] = c(0,10,11,99,100)
+head(marks,n=5)
+(bks = seq(0,100,10))  # 10 intervals
+
+# Slabs : 0-10,20-30 ....
+classint1 = cut(marks, breaks=bks)  # default right=T
+head(classint1,n=5)
+head(marks,n=5)
+table(classint1)
+table(classint1, useNA='ifany')
+
+classint2 = cut(marks, breaks=bks,right=F)  # default right=T
+head(classint2,n=5)
+head(marks,n=5)
+table(classint2, useNA='ifany')
+
+# correct the problem of NA
+classint1a = cut(marks, breaks=bks, include.lowest = T)  # default right=T
+as.character(head(classint1a,n=5))
+head(marks,n=5)
+table(classint1a,useNA='ifany')
+
+
+classint2a = cut(marks, breaks=bks, include.lowest=T, right=F)  # default right=T
+as.character(head(classint2a,n=5))
+head(marks,n=5)
+table(classint2a,useNA='ifany')
+
+LETTERS[1:5]; letters[1:8]; month.abb[1:5]
+#Giving Labels
+length(bks)
+#levels(classint)
+LETTERS[1:length(bks)-1]
+classint1b = cut(marks, breaks=bks, include.lowest = T, 
+                 labels=LETTERS[1:length(bks)-1])  # default right=T
+as.character(head(classint1b,n=5))
+head(marks,n=5)
+table(classint1b,useNA='ifany')
+
+
+
+
+# Ordered_labels
+classint1c = cut(marks, breaks=bks, include.lowest = T,
+                 labels=c('B','C','F','A','G','P','L','H','K','O'))  # default right=T
+as.character(head(classint1b,n=5))
+head(marks,n=5)
+table(classint1c,useNA='ifany')
+
+
+
+
+
+
+# classint1d = cut(marks, breaks=bks, include.lowest = T, ordered_result = T,
+#                  labels=c('1','3','5','8','4','6','7','10','9','2'))  # default right=T
+# as.character(head(classint1b,n=5))
+# head(marks,n=5)
+# table(classint1d,useNA='ifany')
+
+
+
+
+
+# try for dig.lab =3
+classint5 = cut(marks, breaks=10, dig.lab=2)
+classint5
+table(classint5)

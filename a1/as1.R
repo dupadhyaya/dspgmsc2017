@@ -133,7 +133,8 @@ breaks
 marks.cut = cut(marks, breaks)
 marks.cut
 marks.table = table(marks.cut)
+marks.table
 cbind(marks.table)
 marks
-hist(marks)
+hist(marks, breaks=10)
 
