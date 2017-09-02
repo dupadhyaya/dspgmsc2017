@@ -4,9 +4,10 @@ cat(marks1)
 marks1 = c(7.5, 10, 8.33, 6.67, 9.17, 5.83, 6.67, 4.17, 7.5, 7.5, 8.33)
 marks1
 mean(marks1)
+sort(marks1)[5]
 median(marks1)
 table(marks1)
-names(sort(table(marks1), decreasing=T))
+names(sort(table(marks1), decreasing=T))[1]
 
 library(modeest)
 (mlv(marks1,  method = "mfv"))
