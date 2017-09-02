@@ -28,7 +28,7 @@ download.file("https://www.bls.gov/tus/special.requests/atusact_0315.zip", temp)
 timeUse <- fread(unzip(temp, files = "atusact_0315.dat"))
 rm(temp)
 
-
+library(xlsx)
 url <-"https://www1.toronto.ca/City_Of_Toronto/Information_Technology/Open_Data/Data_Sets/Assets/Files/fire_stns.zip"
 
 temp <- tempfile()
