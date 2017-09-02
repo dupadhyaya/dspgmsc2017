@@ -15,3 +15,4 @@ select(iris, starts_with("Petal")) # Select columns with
 mutate(mtcars, displ_1 = disp/61) #Add columns with 
 transmute(mtcars, displ_2 = disp/61) #Add columns with 
 
+#http://www-huber.embl.de/users/klaus/Teaching/DataHandling.pdfhttp://www-huber.embl.de/users/klaus/Teaching/DataHandling.pdf
