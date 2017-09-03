@@ -137,3 +137,13 @@ sample.rows(mtcars,5)
 library("tibble")    
 a = mtcars[sample(1:nrow(mtcars), 3),]
 a
+
+
+# Library kimisc
+library(kimisc)
+example(sample.rows)
+set.seed(12)
+df3= data.frame(a=c(1,2,3), b=c(4,5,6), 
+      row.names = c('a','b','c'))
+sample.rows(df3, 10, replace=TRUE)  # show how many times repeated
+  
