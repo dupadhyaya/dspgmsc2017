@@ -24,3 +24,8 @@ x
 rep(x)
 rep(x,2)
 rep(x, length.out=4)  # recycle
+
+
+
+(examunit = rep(c(1,2,3,4), times=4))
+(examunit = rep(c(1,2,3,4), each=4))

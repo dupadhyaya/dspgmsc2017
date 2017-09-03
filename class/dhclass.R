@@ -222,31 +222,41 @@ sort(round((df2$rpgm - mean(df2$rpgm))/ sd(df2$rpgm),2))  # same as above
 # Apply Commands -------
 
 #apply : array/matrix -> vector/array/list
-col7 = 
+
 df7 = df2[,c('fees','rpgm','stats','excel','sql')]
+df8 = df2[,c('rpgm','stats','excel','sql')]
 rownames(df7) = df2$rollno
-df7amat = as.matrix(df7)
-str(df7amat)
-df7amat
-apply(df7amat,2,max)  # colwise max
-apply(df7amat[,2:5],1,mean)  # row-wise mean
-apply(df7amat,c(1,2),mean)  # ???
-apply(df7amat[,2:5],2,range)  # col-wise range
-apply(df7amat[,2:5],2,fivenum)  # col-wise range
+rownames(df8) = df2$rollno
+
+df7mat = as.matrix(df7)
+(df8mat = as.matrix(df8))
+
+str(df7mat)
+df7mat
+apply(df7mat,2,max)  # colwise max
+apply(df7mat[,2:5],1,mean)  # row-wise mean
+apply(df7mat,c(1,2),mean)  # ???
+apply(df7mat[,2:5],2,range)  # col-wise range
+apply(df7mat[,2:5],2,fivenum)  # col-wise range
 
 # function and apply it
 
-apply(df7amat[,2:5],2,function(x) round(x/sum(x),2))  # col-wise function
-apply(df7amat[,2:5],c(1,2), 
+apply(df7mat[,2:5],2,function(x) round(x/sum(x),2))  # col-wise function
+apply(df7mat[,2:5],c(1,2), 
   function(x) ifelse(x>60,'P','F') )
-apply(df7amat[,2:5],c(1,2), 
+apply(df7mat[,2:5],c(1,2), 
       function(x) ifelse(x>60,1,0) )
-apply(df7amat[,2:5],2, 
+apply(df7mat[,2:5],2, 
       function(x) c(mu=mean(x), sd=sd(x)) )
-apply(df7amat[,2:5],1, 
+apply(df7mat[,2:5],1, 
       function(x) c(mu=mean(x), sd=sd(x)) )
 
-identical(df7amat[,2:5], 2)   #compare colns
+identical(df7mat[,2:5], 2)   #compare colns
+
+apply(df8mat,1:2, mean)  # same as original matrix
+apply(df8mat,1, mean)
+apply(df8mat,2, mean)
+
 
 # col Row Means Sums
 colSums(df7amat)
@@ -254,6 +264,24 @@ rowSums(df7amat[,2:5])
 round(colMeans(df7amat),2)
 round(rowMeans(df7amat[,2:5]),2)
 
+# Using by 
+by(df2[,c('rpgm','stats','excel','sql')], df2$gender, colMeans)
+
+# tapply
+# 
+#sapply - like lapply
+#vapply - similar to sapply - specific value
+#mapply - multivariate version of sapply
+#
+# lapply - retuns a list
+# rapply - recursive version of lapply
+
+
+
+#sweep
+sweep(df8mat,2, 1:2)
+
+#apply(df8mat, 2, mean)
 
 passfail = function(x) {
   if (x > 60) {
