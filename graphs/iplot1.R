@@ -1,5 +1,6 @@
 # Install iplots
-install.packages("iplots",dep=TRUE)
+#install.packages("iplots",dep=TRUE)
+
 
 # Create some linked plots 
 library(iplots)
