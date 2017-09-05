@@ -7,7 +7,8 @@ counts= table(Treatment,Improved)
 counts
 spine(counts)
 spine(Treatment,Improved, 
-      gp=gpar(fill= c("red",'blue','violet'), col='green',lty=1, lwd=3))
+      gp=gpar(fill= c("red",'blue','violet'),
+              col='green',lty=1, lwd=3))
 ?spine
 levels(Improved)
 ?gpar
