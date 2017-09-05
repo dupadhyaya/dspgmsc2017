@@ -14,6 +14,7 @@ array(data = NA, dim = length(data), dimnames = NULL)
 salesarray = array(dim= c(4,3,2) , data=sales,
         dimnames = list(salesman,department,company))
 salesarray
+mosaicplot(salesarray)
 colnames(salesarray)
 rownames(salesarray)
 

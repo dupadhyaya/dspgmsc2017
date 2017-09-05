@@ -22,7 +22,8 @@ plot(wt,disp, main="Scatterplot of wt vs disp")
 hist(wt, main="Histogram of wt")
 boxplot(wt, main="Boxplot of wt")
 
-
+par(mar=c(1,1,1,1))
+plot.new()
 # Add boxplots to a scatterplot
 par(fig=c(0,0.8,0,0.8), new=TRUE)
 plot(mtcars$wt, mtcars$mpg, xlab="Car Weight",
@@ -34,6 +35,7 @@ boxplot(mtcars$mpg, axes=FALSE)
 mtext("Enhanced Scatterplot", side=3, outer=TRUE, line=-3)
 
 ?graphics.off()
+plot.new()
 par(mar=c(1,1,1,1))
 # Add boxplots to a scatterplot
 par(fig=c(0,0.8,0,0.8), new=TRUE)
@@ -41,6 +43,7 @@ plot(mtcars$wt, mtcars$mpg, xlab="Car Weight",
      ylab="Miles Per Gallon")
 par(fig=c(0,0.8,0.55,1), new=TRUE)
 boxplot(mtcars$wt, horizontal=TRUE, axes=FALSE)
-par(fig=c(0.65,1,0,0.8),new=TRUE)
+par(fig=c(0.5, , 0,0.8),new=TRUE)
 boxplot(mtcars$mpg, axes=FALSE)
+
 mtext("Enhanced Scatterplot", side=3, outer=TRUE, line=-3)

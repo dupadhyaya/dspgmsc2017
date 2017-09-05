@@ -22,3 +22,35 @@ mosaicplot(x, main = "Survival on the Titanic",
            off = c(30, 12),
            border=2)
 
+
+
+
+# Another Example
+# Mosaic Plot Example
+library(vcd)
+vcd::mosaic(HairEyeColor, shade=TRUE, legend=TRUE)
+
+# R Mosaic Plot Example
+airquality
+str(airquality)
+table1 <- table(airquality$Temp, airquality$Month)
+table1
+mosaicplot(table1)
+
+#https://www.tutorialgateway.org/mosaic-plot-in-r/
+#http://www.datasciencemadesimple.com/mosaic-plot-in-r/
+
+# mosaic plot in R with mosaicplot function
+
+mosaicplot(UCBAdmissions, sort = 3:1,
+           col = hcl(c(120, 10)),
+           main = "Student admissions at UC Berkeley")  
+
+## Association Plot Example
+library(vcd)
+vcd::assoc(HairEyeColor, shade=TRUE)
+mosaicplot(HairEyeColor)
+HairEyeColor
+#association plot use assoc(x, row_vars, col_vars) 
+#where x is a contingency table, row_vars is a vector of integers giving the indices of the variables to be used for the rows, and col_vars is a vector of integers giving the indices of the
+# variables to be used for the columns of the association plot.
