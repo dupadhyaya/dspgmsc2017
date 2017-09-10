@@ -17,17 +17,22 @@ str(df2)
 
 # Date Column ----------
 as.Date('1967-20-15')  # wrong
-as.Date('1967-10-15')  # right
+as.Date('1967-10-15')  # right default %y-%b-%d : Learn This
 ?as.Date
-#as.Date('05-Oct-1967',format="%d-%b-%Y")   # This is correct
-as.Date('05-Oct-67',format="%d-%b-%y")   # This is correct
+as.Date('05-Oct-1967',format="%d-%b-%Y")   # This is correct
+as.Date('05-Oct-67',format="%d-%b-%y")   # This is also correct: Next Century
+as.Date('05-Oct-1967',format="%d-%b-%Y")   # This is also correct: Next Century
+
 
 # now convert the date column
+head(df2$dob)  # 1-Sep-96 : d-b-y 
+#%d	Decimal date %b	Abbreviated month %y	2-digit year
 (df2$dob = as.Date(df2$dob,format="%d-%b-%y"))
 
-#add another column -----
-Sys.Date() - df2$dob # days -> age
+#add another column -----Calc age
+Sys.Date() - df2$dob # days -> age  : Numeric Values - days: Diff in weeks- > years
 (df2$age = ceiling(as.numeric(difftime(Sys.Date(), df2$dob, unit='weeks')) / 52.25 )  )
+head(df2$age)
 
 # Vector of colnames-------
 cat(names(df2))
@@ -43,34 +48,42 @@ df2[df2$age > 30, ][1:2]
 # Filter -----------
 df2[df2$gender == 'M' & df2$course=='PGDDS', ][1:2]  # by course & gender
 
-# Find Indices ----------
+# Find from Indices ----------
 df2[df2$hostel == TRUE,][1:2]  #stay in hostel
-which(df2$hostel == TRUE)   # using which command
-df2[ which(df2$hostel == TRUE) ,][c(1,2,4,5)]
-df2[ which(! df2$hostel == TRUE) ,][c(1,2,4,5)]
+which(df2$hostel == TRUE)   # using which command Tells  indices
+df2[ which(df2$hostel == TRUE) ,][c(1,2,4,5)]  # in hostel
+df2[ which(! df2$hostel == TRUE) ,][c(1,2,4,5)]  # not in hostel
 
 
 # Sort ---------
-df2$name[order(df2$age)]
-df2[order(df2$age),c('name','age')]
-df2[order(df2$fees, decreasing=T),c('name','age','fees')]
-df2[order(df2$course, -df2$rpgm),c('name','age','fees','course','rpgm')]
+df2$name[order(df2$age)]  # sort by age; display names
+df2$name[order(-df2$age)]  # sort by descending age; display names
 
+df2[order(df2$age),c('name','age')]
+df2[order(df2$hostel, -df2$age),c('name','age','hostel')]
+# hostel asc, age desc 
+
+df2[order(df2$fees, decreasing=T),c('name','age','fees')]
+df2[order(-df2$fees),c('name','age','fees')]
+
+df2[order(df2$course, -df2$rpgm),c('name','age','fees','course','rpgm')]
+df2$name[1]
 # Function -----------
 # using for 
 feestatus = function(x) {
   if (x >= 150000)
-    print(paste(x,'- Fee Paid'))
+    print(paste(i, df2$name[i], x,'- Fee Paid'))
   else
-    print(paste(x,'- Fee Not Paid -xxxx'))
+    print(paste(i, df2$name[i], x,'- Fee Not Paid -xxxx'))
 }
-feestatus(df2$fees[2])
+feestatus(df2$fees[2])  # check if its working - run function now
 for (i in c(1:11)) {
   feestatus(df2$fees[i])
 }
 
 
 # Subset --------
+?subset
 subset(df2, rpgm > 60)[c('rollno','name', 'rpgm')]
 subset(df2, gender=='F' & age > 25, select=rollno:hostel)  # variables between
 subset(df2, hostel==FALSE & age > 25, select=c('rollno','name','gender','age'))  # variables between
@@ -96,14 +109,14 @@ dplyr::tbl_df(df2)  # shows the data type of each column
 sample(df2, 2)  # any 2 columns
 sample(nrow(df2),3)  # sample from numbers - use it indices
 df2[sample(nrow(df2),3), ][1:3]  # select any 3 rows from DF
-dplyr::sample_n(df2,5)[1:3]
+dplyr::sample_n(df2,5)[1:3]   # another way
 # use set.seed(1234) to get same sample 
 kimisc::sample.rows(df2, 10, replace=TRUE)[1:2]  # show how many times repeated
 
 
 # Arrange - order of coln values --------
-dplyr::arrange(df2, course)[c('name','course','gender')]
-dplyr::arrange(df2, course, gender)[c('name','course','gender')]
+dplyr::arrange(df2, course)[c('name','course','gender')]  # coursewise
+dplyr::arrange(df2, course, gender)[c('name','course','gender')] # course, gender
 dplyr::arrange(df2, -rpgm, sql)[c('name','course','gender','rpgm','sql')]
 # one descending & other ascending
 dplyr::arrange(df2, desc(course), gender)[c('name','course','gender')]
@@ -111,7 +124,7 @@ dplyr::arrange(df2, desc(course), gender)[c('name','course','gender')]
 #Select 
 dplyr::select(df2, course, gender)[1:4,]  # selected columns - 1-4 rows
 dplyr::select(df2, course, -gender)[1:4,]  # confusion cannot mix
-dplyr::select(df2, -course,-email, -gender)[1:4,]
+dplyr::select(df2, -course,-email, -gender)[1:4,]  # ignore some colns
 
 #mutate - temporarily create column and join
 dplyr::mutate(df2, total = rpgm + sql + excel)[c('name','total')]
@@ -120,8 +133,8 @@ dplyr::mutate(df2, total = rpgm + sql + excel,
 
 #Splitting data into smaller parts & then taking summary on them
 by_course = dplyr::group_by(df2, course)
-by_course
-dplyr::summarise(by_course, total = mean(rpgm))
+by_course  # view the part summary
+dplyr::summarise(by_course, total = mean(rpgm)) # now do summary by group
 
 #Pipe Operator
 library(dplyr)  # reqd for pipe

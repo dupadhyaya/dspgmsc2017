@@ -28,6 +28,7 @@ new.data = data.frame(height= 70)
 new.data = data.frame(height=c(70,75,80))
 
 predict(weight.lm, newdata = new.data, interval='confidence')
+predict(weight.lm, newdata = new.data, interval='prediction')
 
 #http://www.dummies.com/programming/r/how-to-predict-new-data-values-with-r/
 
