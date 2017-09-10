@@ -33,3 +33,6 @@ lines(wt)
 marks= rnorm(100,50, 10)
 hist(marks, freq=F)
 lines(density(marks))
+str(mtcars)
+names(mtcars)[1] = 'mpg'
+
