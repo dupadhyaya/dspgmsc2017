@@ -2,12 +2,16 @@
 
 # Read File ------
 df1 = read.csv(file='./data/dsstudents.csv')
+#df1a = read.csv(file=file.choose())
+df1b = read.csv(file='./data/dsstudents.csv', stringsAsFactors = F)
+str(df1b)
 str(df1)
 names(df1)
-
+?read.csv
 # start from here -------
 colcls =c('numeric', NA, 'factor', 'factor', 'logical', 'character',
-          'numeric', 'character' ,'character', 'character', rep('numeric',4)      )
+          'numeric', 'character' ,'character', 'character',
+          rep('numeric',4)      )
 
 df2 = read.csv(file='./data/dsstudents.csv', 
               colClasses = colcls, as.is=T)  # asis for name
@@ -20,18 +24,22 @@ as.Date('1967-20-15')  # wrong
 as.Date('1967-10-15')  # right default %y-%b-%d : Learn This
 ?as.Date
 as.Date('05-Oct-1967',format="%d-%b-%Y")   # This is correct
+as.Date('05-10-1967',format="%d-%b-%Y")   # This is correct
+
 as.Date('05-Oct-67',format="%d-%b-%y")   # This is also correct: Next Century
 as.Date('05-Oct-1967',format="%d-%b-%Y")   # This is also correct: Next Century
 
-
+str(df2$dob)
 # now convert the date column
 head(df2$dob)  # 1-Sep-96 : d-b-y 
 #%d	Decimal date %b	Abbreviated month %y	2-digit year
 (df2$dob = as.Date(df2$dob,format="%d-%b-%y"))
-
+str(df2$dob)
 #add another column -----Calc age
 Sys.Date() - df2$dob # days -> age  : Numeric Values - days: Diff in weeks- > years
-(df2$age = ceiling(as.numeric(difftime(Sys.Date(), df2$dob, unit='weeks')) / 52.25 )  )
+difftime(Sys.Date(), df2$dob, unit='weeks')
+(df2$age = ceiling(as.numeric(difftime(Sys.Date(),
+                    df2$dob, unit='weeks')) / 52.25 )  )
 head(df2$age)
 
 
@@ -49,7 +57,10 @@ df2$age > 30 #  by age
 df2[df2$age > 30, ][1:2]
 
 # Filter -----------
-df2[df2$gender == 'M' & df2$course=='PGDDS', ][1:2]  # by course & gender
+df2[df2$gender == 'M' & df2$course=='PGDDS',c('rollno','name') ]
+df2[df2$gender == 'M' & df2$course=='PGDDS',c(1,2) ]
+
+#[1:2]  # by course & gender
 
 # Find from Indices ----------
 df2[df2$hostel == TRUE,][1:2]  #stay in hostel
