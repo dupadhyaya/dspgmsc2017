@@ -34,11 +34,14 @@ Sys.Date() - df2$dob # days -> age  : Numeric Values - days: Diff in weeks- > ye
 (df2$age = ceiling(as.numeric(difftime(Sys.Date(), df2$dob, unit='weeks')) / 52.25 )  )
 head(df2$age)
 
+
+
 # Vector of colnames-------
 cat(names(df2))
 selcol = c("rollno","name","course", "gender", "hostel", "dob", 
            "fees", "email", "mobno", "city","rpgm", "excel", 
            "sql", "stats", "age")
+?data.frame
 
 #df2-------
 # Filter -----
@@ -154,11 +157,12 @@ df2 %>% dplyr::group_by(course) %>%
 #  Wide to Long
 df4 = df2[,c('rollno','name','rpgm','excel','sql','stats')]
 str(df4)
-tidyr::gather(df4, key=c('rollno','name'), value=c('rpgm','stats'))
-df4b= gather(df4,key='subject',value='marks', rpgm,stats,excel,sql)
-df4b
+?gather
+tidyr::gather(df4, key='rollno', value='marks', rpgm,stats)
+
+(df4b= tidyr::gather(df4,key='subject',value='marks', rpgm,stats,excel,sql))
 str(df4b)
-#melt
+#melt - another method 
 cat(selcol)
 selcol2 = selcol[selcol %in% c('rollno', 'name', 'rpgm', 'stats','excel')]
 selcol2
@@ -167,8 +171,8 @@ cat(names(df2))
 
 
 
-#  Long to Wide
-(df4c= spread(df4b, key='subject', value='marks'))
+#  Long in lenght to Wide more colns
+(df4c= tidyr::spread(df4b, key='subject', value='marks'))
 ?spread
 str(df6a)
 (df6b = reshape::cast(df6a, rollno + name ~ variable, mean))  # mean or sum - same here
@@ -177,8 +181,11 @@ str(df6a)
 
 # Aggregation - Summarisation ------
 ?aggregate  # matric, numeric
+df2
 aggregate(df2, by=list(course,gender), FUN=sum)  #incorrect
-aggregate(df2$fees, by=list(course,gender), FUN=sum)  #correct
+aggregate(df2$fees, by=list(df2$course, df2$gender), FUN=sum)  #correct
+aggregate(df2$fees, by=list(df2$course, df2$gender), FUN=mean)  #correct
+
 df5 = df2[,c('gender','hostel', 'course','fees','rpgm','stats', 'excel', 'sql')]
 str(df5)
 rownames(df5) = df2$rollno
@@ -187,11 +194,11 @@ df5
 aggregate(df5[4:8],list(df5$gender,df5$course,df5$hostel),sum)
 aggregate(df5[4:8],list(gender=df5$gender,course=df5$course,hostel= df5$hostel),mean)
 
-aggregate(. ~ gender, mean, data=df5[4:8])
-aggregate(. ~ gender + course, mean, data=df5[4:5])
-with(df5, aggregate(df5[4:7], by=list(hostel=hostel, course=course),FUN=mean))
+aggregate(. ~ df5$gender, mean, data=df5[4:8])
+aggregate(. ~ df5$gender + df5$course, mean, data=df5[4:5])
+with(df5, aggregate(df5[4:7], by=list(hostel=df5$hostel, course=df5$course),FUN=mean))
 
-aggregate(rpgm ~ . ,data=df5[4:5], FUN=mean)  # Formula correct
+aggregate(df5$rpgm ~ . ,data=df5[4:5], FUN=mean)  # Formula correct
 aggregate(rpgm + excel + stats + sql  ~ fees ,data=df5[4:8], FUN=mean)  # Formula correct
 
 # Other Packages
