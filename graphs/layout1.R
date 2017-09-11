@@ -3,6 +3,9 @@
 # row 1 is 1/3 the height of row 2
 # column 2 is 1/4 the width of the column 1 
 
+
+
+
 mar = c(5, 4, 4, 2) + 0.1
 attach(mtcars)
 layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE), 
