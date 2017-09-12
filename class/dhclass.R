@@ -42,6 +42,27 @@ difftime(Sys.Date(), df2$dob, unit='weeks')
                     df2$dob, unit='weeks')) / 52.25 )  )
 head(df2$age)
 
+summary(df2)
+
+
+# Save data
+write.csv(x=df2,file='./data/dhiraj.csv') # save to CSV
+# you can save to other formats using other tools/ options
+?write.csv
+saveRDS(object=df2, file='./data/du.RDS')  # only 1 object at time
+markstotal = runif(11,50,150)
+save(markstotal,df2, file='./data/du2.RData') # save multiple objects in R
+save.image(file='./data/du3.RData') # save all current objects/multiple objects in R
+save.image()  # saves to default RData
+
+#Load objects from saved locations
+# From CSV
+# From RDS
+readRDS(file='./data/du.RDS') # loads and prints
+mydata = readRDS(file='./data/du.RDS') # save it into object
+#load()  # for data in .RData this happens automatically
+load(file='./data/du2.RData')
+load(file='./data/du3.RData')
 
 
 # Vector of colnames-------
