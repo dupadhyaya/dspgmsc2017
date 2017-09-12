@@ -19,6 +19,8 @@ str(df2)
 # Now data structure seems to be alright
 
 
+
+?col
 # Date Column ----------
 as.Date('1967-20-15')  # wrong
 as.Date('1967-10-15')  # right default %y-%b-%d : Learn This
