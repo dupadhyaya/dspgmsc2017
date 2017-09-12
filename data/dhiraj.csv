@@ -1,0 +1,12 @@
+"","rollno","name","course","gender","hostel","dob","fees","email","mobno","city","rpgm","excel","sql","stats","age"
+"1",17057,"Kaustav Chatterjee","MSCDS","M",TRUE,1996-09-01,150000,"kstvchatterjee@gmail.com","9674945614","Kolkata",71,85,79,66,21
+"2",17078,"Shubham Pujan","PGDDS","M",FALSE,1994-10-01,140000,"shubhampujan@gmail.com","7353863034","Bangalore",90,57,90,75,23
+"3",17032,"Rashmi Ranjan Mangaraj","MSCDS","M",TRUE,1994-08-01,160000,"mangarajrashmiranjan01@gmail.com","7327014277","Bhubaneswar",90,54,80,77,24
+"4",17056,"Meena Srisha Valavala","PGDDS","F",TRUE,1994-02-02,150000,"meenasirisha145@gmail.com","9703849549","Rajahmundry",84,56,59,83,24
+"5",17010,"Achal Kumar","PGDDS","M",FALSE,1992-06-06,140000,"infosec.achal@gmail.com","9821753734","New Delhi",50,51,83,63,26
+"6",17018,"Vijay Pal Singh","PGDDS","M",TRUE,1991-11-01,160000,"vijayoswalia@gmail.com","9999438393","New Delhi",53,54,70,89,26
+"7",17045,"Apoorva Karn","PGDDS","F",FALSE,1991-06-01,150000,"karnapoorva@gmail.com","7975929578","Noida",68,69,79,60,27
+"8",17087,"Hitesh Mann","PGDDS","M",FALSE,1990-12-15,140000,"hitesh.mann88@gmail.com","9910666792","Delhi",66,50,90,81,27
+"9",17013,"Lalit Sahni","PGDDS","M",TRUE,1987-12-01,160000,"lalit.sahni@gmail.com","9914901199","Faridabad",61,73,63,63,30
+"10",17012,"Goldie Sahni","PGDDS","M",FALSE,1980-04-17,150000,"goldiesahni@gmail.com","8860812796","Greater Noida",60,50,85,84,38
+"11",17084,"Shruti Sinha","PGDDS","F",FALSE,1980-05-10,140000,"sinhashruti1212@gmail.com","9880377382","Bangalore",88,52,87,73,38
