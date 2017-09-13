@@ -8,11 +8,14 @@ sort(marks)
 
 sort(marks, decreasing = TRUE)
 sort(-marks)  # wrong
+rev(sort(marks))
 
 # NA values and sort later ----
 
 # order
 order(marks) # indices
+marks
+marks[c(6,7,10)]
 marks[order(marks)]  # similar to sort(x)
 order(marks, decreasing = T)
 order(-marks)  # decreasing
@@ -21,32 +24,31 @@ length(marks)
 marks2 = marks
 marks2[5] = NA  # check with NA Value  : display, position
 marks2
-order(marks2)  # NA not displayed
+order(marks2)  # NA is last
 ?order
 order(marks2, na.last = NA)  # removed
-length(marks2)
 length(marks)  # length is same
 is.na(marks2)  # logical vector if NA
 anyNA(marks2)  # is there is any NA
 
 mean(marks2)  # does not work with NA values
 mean(marks2, na.rm=T)  # add na.rm=T
+order(marks2, na.last = NA)  # 5 removed
 order(marks2, na.last = FALSE)   # 5 is first
 order(marks2, na.last = TRUE)   # 5 is last
 length(order(marks2, na.last = TRUE))   # 5 is last
 
-order(marks2, na.last = NA)   # 5 is not there
 length(order(marks2, na.last = NA))   # 5 is not there
 
-
-
 # rank handles tied values
+?rank
 marks   # 10-3 times, 8 & - 2 times
 sort(marks)
+table(marks)
 
 #[1]  6  6  7  8  8  9  9 10 10 10 10
 #     1  2  3  4  5  6  7  8  8  9 10  
-rank(marks) # ties method = av, first, last, random , max, min
+rank(marks) # ties method = avg, first, last, random , max, min
 ?rank
 table(marks)  # check freq
 marks
