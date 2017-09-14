@@ -3,7 +3,17 @@
 parties1 = c('bjp', 'congress', 'sp', 'aap')
 length(parties1)
 states1 = c('up', 'delhi','haryana', 'punjab','uk')
-length(states2)
+length(states1)
+
+
+
+
+
+
+
+
+
+
 
 (col1 = rep(parties1, each=5))
 length(col1)
@@ -14,6 +24,7 @@ length(col2)
 party = factor(col1)
 state = factor(col2)
 #xtabs(col1 ~ col2)
+set.seed(1234)
 (mps = ceiling(runif(20,25,50)))
 (df1 = data.frame(party, state, mps))
 table(df1) # not relevant here...

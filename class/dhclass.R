@@ -93,27 +93,39 @@ df2[ which(! df2$hostel == TRUE) ,][c(1,2,4,5)]  # not in hostel
 
 #13 Sep 17
 # Sort ---------
+df2
 df2$name[order(df2$age)]  # sort by age; display names
-df2$name[order(-df2$age)]  # sort by descending age; display names
+#df2$name[order(-df2$age)]  # sort by descending age; display names
+sort(df2$age)
+rev(sort(df2$age))
+sort(-df2$age)   # avoid
+df2$name[rev(order(df2$age))]
 
 df2[order(df2$age),c('name','age')]
-df2[order(df2$hostel, -df2$age),c('name','age','hostel')]
+df2[order(df2$hostel, df2$age),c('name','age','hostel')]  #hoste, age
+df2[order(df2$hostel, -df2$age),c('name','age','hostel')] # hostel, rev(age)
+
 # hostel asc, age desc 
 
 df2[order(df2$fees, decreasing=T),c('name','age','fees')]
-df2[order(-df2$fees),c('name','age','fees')]
+df2[rev(order(df2$fees)),c('name','age','fees')]
 
 df2[order(df2$course, -df2$rpgm),c('name','age','fees','course','rpgm')]
 df2$name[1]
+
+# Move to Margins
+
+#14 Sep 
 # Function -----------
 # using for 
+df2$fees
 feestatus = function(x) {
   if (x >= 150000)
     print(paste(i, df2$name[i], x,'- Fee Paid'))
   else
     print(paste(i, df2$name[i], x,'- Fee Not Paid -xxxx'))
 }
-feestatus(df2$fees[2])  # check if its working - run function now
+# error feestatus(df2$fees[2])  # check if its working - run function now
 for (i in c(1:11)) {
   feestatus(df2$fees[i])
 }

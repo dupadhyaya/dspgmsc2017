@@ -2,10 +2,21 @@
 ?read.csv
 # Read from CSV File
 getwd()
-#file.show()
+#dir()
+getwd()
 df1 = read.csv(file='./data/dsstudents.csv')
-df1
+head(df1[,1:2])
 str(df1)
+
+df2 = read.csv(file='./data/dsstudents.csv',
+               row.names = c(paste('R',1:11, sep='')))
+df2 = read.csv(file='./data/dsstudents.csv',
+               row.names = 1)
+
+head(df2[,1:2])
+df2$rollno2 = row.names(df2)
+df2[,c('rollno2')]
+str(df2)
 
 df2 = read.csv(file='./data/dsstudents.csv', stringsAsFactors = F)
 df2
@@ -38,3 +49,11 @@ read.csv(file, header = TRUE, sep = ",", quote = "\"",
 
 
 ?read.table
+
+
+df1 = read.csv(file='./data/dsstudents.csv')
+df1
+df2 = read.csv(file='./data/dsstudents.csv', row.names = 1)
+df2[,1:2]
+
+write.csv(df2, file='./data/dsstudents2.csv')
