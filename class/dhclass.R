@@ -91,7 +91,7 @@ which(df2$hostel == TRUE)   # using which command Tells  indices
 df2[ which(df2$hostel == TRUE) ,][c(1,2,4,5)]  # in hostel
 df2[ which(! df2$hostel == TRUE) ,][c(1,2,4,5)]  # not in hostel
 
-
+#13 Sep 17
 # Sort ---------
 df2$name[order(df2$age)]  # sort by age; display names
 df2$name[order(-df2$age)]  # sort by descending age; display names
