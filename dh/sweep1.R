@@ -11,6 +11,14 @@
 # create some data:
 (M = matrix( 1:12, ncol=3))
 
+M+1
+M+c(1,2)
+M
+M+c(1,2,3)
+cbind(M, M+c(1,2,3))
+
+
+
 # calculate column-wise mean for M
 (dx = colMeans(M))
 colSums(M)  # and not colsums
@@ -27,3 +35,9 @@ M ; dx
 sweep(M, 1, dx, FUN="-")   # Warning  - no recycle, less nos 3 and 4
 (dy = rowMeans(M))
 sweep(M, 1, dy, FUN="-")
+
+M+1
+M+c(1,2)
+M
+M+c(1,2,3)
+cbind(M, M+c(1,2,3))
