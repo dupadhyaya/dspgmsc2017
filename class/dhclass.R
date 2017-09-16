@@ -66,7 +66,7 @@ mydata = readRDS(file='./data/du.RDS') # save it into object
 load(file='./data/du2.RData')
 load(file='./data/du3.RData')
 
-
+rm(list=ls())
 # Vector of colnames-------
 cat(names(df2))
 selcol = c("rollno","name","course", "gender", "hostel", "dob", 
@@ -114,6 +114,74 @@ df2[order(df2$course, -df2$rpgm),c('name','age','fees','course','rpgm')]
 df2$name[1]
 
 # Move to Margins
+
+#Contigency Tables ------
+df2
+# table
+cat(names(df2))
+(df2table = table(df2$course,df2$gender))
+table(df2$course,df2$gender, df2$hostel)
+
+# 1 way table
+with(df2, table(course))
+with(df2, table(gender))
+with(df2, table(city))
+
+#xtabs  - uses formula
+xtabs( ~ course + gender, data = df2)
+xtabs( ~ course + gender + hostel, data = df2)
+
+# Margin Tables
+margin.table(df2table,1)
+margin.table(df2table,2)
+margin.table(df2table)
+margin.table(df2table,c(1,2))
+
+# Freq to Prop table
+prop.table(df2table)  # overall proportion x/ sum(x) wise - course
+round(prop.table(df2table),2) # round off
+
+round(prop.table(df2table),2)*100  # Percentage look
+
+df2table
+# margin Table - col and row
+# 
+margin.table(df2table,1)  # for row - distribution
+margin.table(df2table,2)  # for cols distribution
+
+addmargins(df2table)  # add sums all sides rows & colns
+?addmargins   # u can do other operations sum mean sd
+addmargins(df2table, FUN=list(sd,var))
+addmargins(df2table, 1)  # col sum shown as row
+addmargins(df2table, 2) # rows sum shown as col
+
+addmargins(prop.table(df2table), 1)  # col proportions shown as row
+addmargins(prop.table(df2table), 2)  # col proportions shown as row
+addmargins(prop.table(df2table))  # col proportions shown as row
+
+addmargins(prop.table(df2table,2), 1)  # col proportions shown as row
+addmargins(prop.table(df2table,1), 2)  # row proportions shown as col
+
+# ftable
+(df2table2 = xtabs(~ course + hostel + gender, data= df2))
+df2table2
+ftable(df2table2)
+margin.table(df2table2,1)
+margin.table(df2table2,2)
+margin.table(df2table2,3)
+margin.table(df2table2,c(1,2))
+margin.table(df2table2,c(1,3))
+margin.table(df2table2,c(2,3))
+
+
+ftable(prop.table(df2table2, c(1,2)))
+ftable(prop.table(df2table2, c(1,3)))
+ftable(prop.table(df2table2, c(2,3)))
+
+ftable(addmargins(prop.table(df2table2, c(1,2)),3))
+
+
+
 
 #14 Sep 
 # Function -----------
@@ -341,71 +409,6 @@ by(df2[,c('rpgm','stats','excel','sql')], df2$gender, colMeans)
 #
 # lapply - retuns a list
 # rapply - recursive version of lapply
-
-#Contigency Tables ------
-df2
-# table
-cat(names(df2))
-df2table = table(df2$course,df2$gender)
-table(df2$course,df2$gender, df2$hostel)
-
-# 1 way table
-with(df2, table(course))
-with(df2, table(gender))
-with(df2, table(city))
-
-#xtabs  - uses formula
-xtabs( ~ course + gender, data = df2)
-xtabs( ~ course + gender + hostel, data = df2)
-
-# Margin Tables
-margin.table(df2table,1)
-margin.table(df2table,2)
-margin.table(df2table)
-margin.table(df2table,c(1,2))
-
-# Freq to Prop table
-prop.table(df2table)  # overall proportion x/ sum(x) wise - course
-round(prop.table(df2table),2) # round off
-
-round(prop.table(df2table),2)*100  # Percentage look
-
-df2table
-# margin Table - col and row
-# 
-margin.table(df2table,1)  # for row - distribution
-margin.table(df2table,2)  # for cols distribution
-
-addmargins(df2table)  # add sums all sides rows & colns
-?addmargins   # u can do other operations sum mean sd
-addmargins(df2table, FUN=mean)
-addmargins(df2table, 1)  # col sum shown as row
-addmargins(df2table, 2) # rows sum shown as col
-
-addmargins(prop.table(df2table), 1)  # col proportions shown as row
-addmargins(prop.table(df2table), 2)  # col proportions shown as row
-addmargins(prop.table(df2table))  # col proportions shown as row
-
-addmargins(prop.table(df2table,2), 1)  # col proportions shown as row
-addmargins(prop.table(df2table,1), 2)  # row proportions shown as col
-
-# ftable
-df2table2 = xtabs(~ course + hostel + gender, data= df2)
-df2table2
-ftable(df2table2)
-margin.table(df2table2,1)
-margin.table(df2table2,2)
-margin.table(df2table2,3)
-margin.table(df2table2,c(1,2))
-margin.table(df2table2,c(1,3))
-margin.table(df2table2,c(2,3))
-
-
-ftable(prop.table(df2table2, c(1,2)))
-ftable(prop.table(df2table2, c(1,3)))
-ftable(prop.table(df2table2, c(2,3)))
-
-ftable(addmargins(prop.table(df2table2, c(1,2)),3))
 
 
 # rowwise - x /rowsum

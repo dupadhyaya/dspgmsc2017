@@ -74,10 +74,12 @@ droplevels(table(fdiabetes))
 
 # 1-M, 2-F
 gender = c( 1,2,1,1,2)
+str(gender)
+
 fgender = factor(gender)
 fgender
 fgender = factor(gender, levels=c(1,2),
-                 labels=c('M', 'F') )
+                 labels=c('Male', 'Female') )
 gender
 fgender
 
