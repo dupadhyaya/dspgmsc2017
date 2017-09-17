@@ -4,22 +4,23 @@ m1 = matrix(1:10,nrow=5)
 m1
 
 # create sample data of Matrix : Use ND data : 3 cols, 30 rows
-m <- matrix(data=cbind(rnorm(30, 0), rnorm(30, 2), rnorm(30, 5)), nrow=30, ncol=3)
-m
+m2 <- matrix(data=cbind(rnorm(30, 0), rnorm(30, 2), rnorm(30, 5)), nrow=30, ncol=3)
+m2
 
 # apply is used for structured data - matrix, dataframe with same number of coln & rows
 # https://www.r-bloggers.com/using-apply-sapply-lapply-in-r/
 # apply Mean on Rowise on all 3 Column
-apply(m, 1, mean)
-apply(m, 2, mean)
+m1
+apply(m1, 1, mean)
+apply(m1, 2, mean)
 # apply function on particular values : count number of negative values
-apply(m, 2, function(x) length(x[x<0]))
-m
-apply(m, 2, function(x) is.numeric(x))
-apply(m, 1, function(x) is.character(x))
-apply(m, 2, function(x) is.vector(x))
+apply(m2, 2, function(x) length(x[x<0]))
+m2
+apply(m2, 2, function(x) is.numeric(x))
+apply(m2, 1, function(x) is.character(x))
+apply(m2, 2, function(x) is.vector(x))
 
-apply(m, 2, function(x) mean(x[x>0]))
+apply(m2, 2, function(x) mean(x[x>0]))
 
 # sapply
 sapply(1:3, function(x) x^2)
