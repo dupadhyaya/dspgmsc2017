@@ -1,5 +1,44 @@
 # Row and Column Sums / Means
 
+?rowSums
+M = matrix(1:12, nrow=4)
+M
+rowSums(M)
+cbind(M,rowSums(M))
+addmargins(M)
+addmargins(M,2)
+margin.table(M,1)
+cbind(M,margin.table(M,1))
+
+colSums(M)
+cbind(M,colSums(M)) # Check ?
+rbind(M,colSums(M))
+addmargins(M, 1)
+margin.table(M,2)
+rbind(M,margin.table(M,2))
+
+# Means
+rowMeans(M)
+cbind(M, rowMeans(M))
+addmargins(M,2,FUN=list(list(mean, sum, sd, var, median)))
+addmargins(M,c(1,2),FUN=list(list(mean, sum, sd),
+                             list(var, median)))
+
+?colMeans(M)
+rbind(M,colMeans(M))
+addmargins(M,1, FUN=list(mean))
+
+(hostel = matrix(rep(c(TRUE, FALSE), 12), nrow=3))
+rowSums(hostel)
+colSums(hostel)
+rowMeans(hostel)
+colMeans(hostel)
+
+
+
+
+?addmargins
+
 ?rowsum
 #rowsum - Colsum - M/ F based on gp variable
 rowsum(x=mtcars, group=mtcars$cyl, reorder = T)
