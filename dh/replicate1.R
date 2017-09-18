@@ -20,7 +20,8 @@ j=0
 replicate(5, 'Hello')
 replicate(5, mean(1:5))
 
-
+seq(1,5,1)
+replicate(5, seq(1,5,1))
 
 
 rep(1:4,len=20)
