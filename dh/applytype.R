@@ -148,8 +148,15 @@ lapply(X,FUN=mean, na.rm=T)
 #Unlist
 unlist(lapply(X,FUN=mean, na.rm=T))
 
-# sapply ----- like lapply - simplify outpu
+# sapply ----- 
+#like lapply - simplify outpu
 sapply(df1,mean)
+
+# vapply ------
+vapply(X, FUN, FUN.VALUE, ..., USE.NAMES = TRUE)
+vapply(df1, FUN=fivenum,
+       c(Min. = 0, "1st Qu." = 0, Median = 0, "3rd Qu." = 0, Max. = 0))
+vapply(df1, FUN=mean, FUN.VALUE=c(mean=0))
 
 #tapply
 (df1a = df1)
@@ -184,4 +191,9 @@ dftemp[order(dftemp$Group.1, dftemp$Group.2, dftemp$Group.3),]
 
 (dftemp = aggregate(x=df1a[c('sub1', 'sub2', 'sub3')], 
       by=list(gpcourse = df1a$course, gphostel=df1a$hostel,gpgender= df1a$gender), FUN=mean))
-dftemp[order(dftemp$gpcourse, dftemp$gpgender, dftemp$gphostel),]
+dftemp[order(dftemp$gpcourse, dftemp$gpgender, 
+             dftemp$gphostel),]
+dftemp[order(dftemp$gpcourse, dftemp$gpgender, 
+             dftemp$gphostel),][,c('gphostel', 'sub1')]
+dftemp[order(dftemp$gpcourse, dftemp$gpgender, 
+             dftemp$gphostel),][,c(3,2,1,4,5,6)]
