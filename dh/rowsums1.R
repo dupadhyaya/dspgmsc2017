@@ -34,7 +34,10 @@ colSums(hostel)
 rowMeans(hostel)
 colMeans(hostel)
 
-
+#data frame
+df = as.data.frame(M)
+class(df)
+rowSums(df)
 
 
 ?addmargins
