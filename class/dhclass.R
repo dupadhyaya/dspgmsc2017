@@ -356,20 +356,23 @@ sort(round((df2$rpgm - mean(df2$rpgm))/ sd(df2$rpgm),2))  # same as above
 # Apply Commands -------
 
 #apply : array/matrix -> vector/array/list
-
-df7 = df2[,c('fees','rpgm','stats','excel','sql')]
-df8 = df2[,c('rpgm','stats','excel','sql')]
+load('./data/du3.Rdata')
+(df7 = df2[,c('fees','rpgm','stats','excel','sql')])
+(df8 = df2[,c('rpgm','stats','excel','sql')])
 rownames(df7) = df2$rollno
 rownames(df8) = df2$rollno
-
-df7mat = as.matrix(df7)
+head(df7); head(df8)
+(df7mat = as.matrix(df7))
 (df8mat = as.matrix(df8))
 
 str(df7mat)
 df7mat
 apply(df7mat,2,max)  # colwise max
 apply(df7mat[,2:5],1,mean)  # row-wise mean
-apply(df7mat,c(1,2),mean)  # ???
+apply(df7mat[,2:5],2,mean)  # col-wise mean
+
+apply(df7mat,c(1,2),mean)  # display all - 2 dim only matrix
+
 apply(df7mat[,2:5],2,range)  # col-wise range
 apply(df7mat[,2:5],2,fivenum)  # col-wise range
 
@@ -377,7 +380,7 @@ apply(df7mat[,2:5],2,fivenum)  # col-wise range
 
 apply(df7mat[,2:5],2,function(x) round(x/sum(x),2))  # col-wise function
 apply(df7mat[,2:5],c(1,2), 
-  function(x) ifelse(x>60,'P','F') )
+  function(x) ifelse(x>60,'Pass','Fail') )
 apply(df7mat[,2:5],c(1,2), 
       function(x) ifelse(x>60,1,0) )
 apply(df7mat[,2:5],2, 
@@ -388,17 +391,27 @@ apply(df7mat[,2:5],1,
 identical(df7mat[,2:5], 2)   #compare colns
 
 apply(df8mat,1:2, mean)  # same as original matrix
-apply(df8mat,1, mean)
-apply(df8mat,2, mean)
+apply(df8mat,1, mean)  # row
+apply(df8mat,2, mean)  # col
 
 
-# col Row Means Sums
+# col Row Means Sums - correct the object name
 colSums(df7amat)
 rowSums(df7amat[,2:5])
 round(colMeans(df7amat),2)
 round(rowMeans(df7amat[,2:5]),2)
 
-# Using by 
+#split
+(df9 = df2[,c('gender','hostel', 'course','fees','rpgm','stats','excel','sql')])
+(df9 = df2[,c('course','fees','rpgm','stats','excel','sql')])
+df9s = split(df9,df9$course)
+sapply(df9$fees, function(x) (mean(x))) # array
+lapply(df9$fees, function(x) (mean(x))) # list
+lapply(df9s, function(x) (mean(x))) # Not working properly
+
+
+
+# Using by  - grouping variable
 by(df2[,c('rpgm','stats','excel','sql')], df2$gender, colMeans)
 
 # tapply
