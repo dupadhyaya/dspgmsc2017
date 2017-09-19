@@ -193,8 +193,8 @@ feestatus = function(x) {
   else
     print(paste(i, df2$name[i], x,'- Fee Not Paid -xxxx'))
 }
-# error feestatus(df2$fees[2])  # check if its working - run function now
-for (i in c(1:11)) {
+dim(df2)[1] ; nrow(df2)
+for (i in c(1:nrow(df2))) {
   feestatus(df2$fees[i])
 }
 
