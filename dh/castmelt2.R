@@ -5,8 +5,9 @@
 sname = rep(c('Achal','Apoorva','Goldie','Hitesh'),4)
 (examunit = rep(c('U1', 'U2', 'U3', 'U4'),each= 4))
 #(examunit = rep(c(1,2,3,4), each=4))
-
+set.seed(1234)
 (rpgm = ceiling(rnorm(4*4,60,10)))
+set.seed(1234)
 (sql  = ceiling(rnorm(4*4,65,10)))
 df1 = data.frame(rollno, sname, examunit, rpgm, sql)
 df1  # 16 rows, 4 students, 4 Units, 2 subjects(cols)
@@ -15,7 +16,8 @@ df1  # 16 rows, 4 students, 4 Units, 2 subjects(cols)
 
 md = reshape::melt(df1, id=c('rollno', 'sname', 'examunit'))
 head(md)
-md[md$rollno==10,]
+md
+md[md$rollno==13,]
 summary(md)
 
 # Cast
@@ -26,7 +28,7 @@ reshape::cast(md, rollno + sname ~ variable, sum)
 
 
 # unitwise mean
-reshape::cast(md, examunit ~ variable, mean)
+reshape::cast(md, examunit ~ variable)
 reshape::cast(md, examunit ~ variable, sum)
 
 head(md)
@@ -49,17 +51,18 @@ reshape::cast(md, rollno + variable ~ examunit, FUN=mean, value='value')
 # initial data -> melt -> cast -> initial 
 reshape::cast(md, rollno + sname + examunit  ~  variable, sum)
 length(md); nrow(md)
-
-# Without aggregation
+head(md)
+# Without aggregation  ----
 reshape::cast(md, rollno + sname + examunit ~ variable)
-reshape::cast(md, rollno + variable ~ examunit)
-reshape::cast(md, rollno ~ variable ~ examunit)  # list type
+reshape::cast(md, rollno + sname + variable ~ examunit)
+reshape::cast(md, rollno + sname ~ variable ~ examunit)  # list type
 
-
+library(reshape)
 # Better way to do it
-md2 = melt(df1, id.vars=c("rollno",'sname', 'examunit'),
+md2 = reshape::melt(df1, id.vars=c("rollno",'sname', 'examunit'),
            measure.vars=c("rpgm", "sql"),
            variable.name="subject", value.name="marks")
+str(md2)
 head(md2)  # with proper labeling
 
 reshape::cast(md2, rollno + sname ~ subject, mean)

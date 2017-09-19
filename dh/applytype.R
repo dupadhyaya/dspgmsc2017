@@ -2,45 +2,55 @@
 
 #Data Structure
 # vector
-v1 = 1:20
+(v1 = 1:20)
 
 #Array ----
 (a1 = array(1:24, dim=c(4,3,2), 
     dimnames = list( c(paste('c',1:4,sep='')), c('d1','d2','d3'),c('s1','s2')) ))
 
 #Matrix ----
-m1 = matrix(c(10:1, rep(5,10), rep(c(5,6),5),seq_len(length.out=10)), byrow=F, ncol =4)
+seq_len(length.out=5)
+m1 = matrix(c(10:1, rep(5,10), rep(c(5,6),5),
+        seq_len(length.out=10) ), byrow=F, ncol =4)
 colnames(m1) = c('sub1','sub2','sub3','sub4')
 rownames(m1) = paste('R',1:10,sep='')
 m1
 
 #DataFrame ----
-(df1 = data.frame(sub1=10:1, sub2=5, sub3=rep(c(5,6),5), sub4=seq_len(length.out=10)))
+(df1 = data.frame(sub1=10:1, sub2=5, 
+        sub3=rep(c(5,6),5), 
+        sub4=seq_len(length.out=10)))
 
 #List ----
-(list1 = list(sub1=10:1, sub2=rep(5,3), sub3=rep(c(5,6),4),sub4=seq_len(length.out=10)))
+(list1 = list(sub1=10:1, sub2=rep(5,3), 
+      sub3=rep(c(5,6),4),
+      sub4=seq_len(length.out=10)))
 
 #print objects
+v1
 a1
 m1
 df1
 list1
 
-
+?melt
 #apply --------
+?apply
 #apply(X, MARGIN, FUN, ...)
 #X - array or matrix MARGIN=1 (Rows) ; 2 (Columns)
 #FUN = mean, median, UDF, .... ... Others eg. na.rm=T
 #Applies a function over the margins
 
 #array
-X=a1
-X
+(X=a1)
 apply(X, 1, sum)  # dimension=1 : c
+apply(X, 1, mean)  # dimension=1 : c
+X
 apply(X, 2, sum)  # d
 apply(X, 3, sum) # s
 apply(X,c(1,2), sum)  # c & d
-apply(X,c(1,2,3), sum)  # original  : c d s 
+apply(X,c(1,2,3), sqrt)  # original  : c d s 
+apply(X,c(1,2,3), sum)
 apply(X,c(2,3), sum)  # sum over 2 & 3rd dim : d & s
 
 
@@ -51,8 +61,14 @@ addmargins(X,3, sum)  # sum s1 + s2
 addmargins(X,c(1,2), sum)  # row & col
 addmargins(X,c(1,3), sum)  # sum rows of s1 & s2
 addmargins(X,c(2,3), sum)  # sum cols of s1 & s2
+class(X)
+m1
+(m2=matrix(1:12,nrow=3))
 
-
+addmargins(m2,c(1,2), 
+    FUN=list(list(sum,sd), 
+  list(mean,var,IQR, sum)))  # row & col
+head(mtcars)
 
 #https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/
   
