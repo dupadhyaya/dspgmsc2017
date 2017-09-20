@@ -12,6 +12,13 @@ all(is.na(df)==F | is.na(df)==T )
 complete.cases(df)
 !complete.cases(df)
 df[complete.cases(df),][1:2]
+mean(df$excel)
+mean(df$excel, na.rm=T)
+mean(df$excel, na.rm=T, trim=.2)
+mean(df$excel, na.rm=T, trim=.4)
+cat(df$excel, trim=.2)
+na.omit(df$excel)
+na.omit(df)
 
 
 colSums(is.na(df))  # apply to numeric M, DF

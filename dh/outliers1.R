@@ -1,4 +1,5 @@
 #Outliers
+#http://rstudio-pubs-static.s3.amazonaws.com/7901_72d4736f412e4414b1aeffbd1d5c69e9.html
 
 (data= df[11:14])  # numeric values
 cat(names(data))
