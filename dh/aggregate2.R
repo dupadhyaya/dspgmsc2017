@@ -3,7 +3,10 @@
 
 # Aggregate the “airquality” data by “airquality$Month“, returning means on each of the numeric variables. Also, remove “NA” values.
 aggregate(airquality, list(airquality$Month), mean, na.rm=T)
+aggregate(mtcars, list(mtcars$am), mean, na.rm=T)
 
+
+?with
 # Aggregate the “airquality” data by the variable “Day“, remove “NA” values, and return means on each of the numeric variables.
 aggregate(airquality, list(airquality$Day), mean, na.rm=T)
 aggregate(airquality[c(1,2,3)], list(airquality$Day), mean, na.rm=T)
