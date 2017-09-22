@@ -1,4 +1,5 @@
 # apply Functions
+# #apply ----
 #create matrix####
 m1 = matrix(1:10,nrow=5)
 m1
