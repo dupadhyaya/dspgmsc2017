@@ -12,3 +12,9 @@ aggregate(df2[c('sql', 'rpgm')], by=list(gender,hostel),
           function(x) c(sum(x), mean(x)))
 str(df2)
 
+
+attach(mtcars)
+(aggdata <-aggregate(mtcars, by=list(cyl,vs), 
+                    FUN=mean, na.rm=TRUE))
+(aggdata <-aggregate(mtcars[c('wt','hp','mpg')], by=list(cyl,vs), 
+                     FUN=mean, na.rm=TRUE))
