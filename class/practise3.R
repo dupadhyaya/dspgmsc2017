@@ -82,6 +82,57 @@ split(df3[c('rollno','name','course','gender')], df3$course)
 split(df3[c('rollno','name','course','gender')], 
       list(df3$gender, df3$hostel))
 
-
+df3
 # aggregate fees wrt to course
-aggregate(df3$fees, list=(df3$course), sum)
+aggregate(df3$fees, list(course= df3$course), sum)
+aggregate(df3$fees, list(df3$course), sum)
+aggregate(df3$fees, list(df3$gender), mean)
+
+aggregate(df3[11:15], list(course= df3$course), mean)
+
+aggregate(df3$fees, list(DSCourse=df3$course, 
+                        Gender=df3$gender), sum)
+
+aggregate(cbind(df3$fees, df3$excel), list(DSCourse=df3$course, 
+                         Gender=df3$gender), sum)
+aggregate(df3[c('fees','excel')], list(DSCourse=df3$course, 
+                                           Gender=df3$gender), sum)
+
+cat(names(df3))
+class(split(df3[1:3], df3$gender))
+l1= split(df3[1:3], df3$gender)
+dim(l1)
+# Margins
+(m = matrix(1:10, nrow=5))
+dim(m)
+dim(df3)
+paste0('a','b','c')
+paste('a','b',sep='2')
+search()
+?search
+(v1 = 1:20)
+diff(v1,2)
+?diff
+trunc(4.32)
+round(4.67,1)
+ceiling(4.67)
+floor(4.67)
+cummax(v1)
+v2 = ceiling(runif(50,10,60))
+v2
+cummax(v2)
+cummin(v2)
+cumsum(v2)
+cumprod(v1)
+v4=1:5
+cumprod(v4)
+factorial(5)
+round(scale(v4, center = F),2)
+?scale
+scale(v2, scale=F)
+x =1/0
+is.na(x)
+is.infinite(x)
+y=NA
+is.nan(y)
+is.nan
