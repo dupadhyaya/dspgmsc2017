@@ -54,3 +54,25 @@ sapply(1:5,function(x) matrix(x,2,2))
 sapply(1:5,function(x) matrix(x,2,2), simplify = "array")
 #Each of these behaviors is of course contingent on our function returning 
 #vectors or matrices of the same length or dimension.
+
+
+
+summary <- function(x) {
+  c(mean(x, na.rm = TRUE),
+    median(x, na.rm = TRUE),
+    sd(x, na.rm = TRUE),
+    mad(x, na.rm = TRUE),
+    IQR(x, na.rm = TRUE))
+}
+
+summary <- function(x) {
+  funs <- c(mean, median, sd, mad, IQR)
+  lapply(funs, function(f) f(x, na.rm = TRUE))
+}
+
+lapply(mtcars, function(x) length(unique(x)))
+Filter(function(x) !is.numeric(x), mtcars)
+integrate(function(x) sin(x) ^ 2, 0, pi)
+
+formals(function(x = 4) g(x) + h(x))
+environment(function(x = 4) g(x) + h(x))
