@@ -14,4 +14,8 @@ x1
 is.null(x1)
 
 #NULL cannot be part of vector
-#
+x= 1/0
+y = x + 2
+is.nan(x)
+is.nan(y)
+z = 
