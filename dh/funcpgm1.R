@@ -15,3 +15,9 @@ Position(f, x, right = FALSE, nomatch = NA_integer_)
 
 x = 1:12
 Position(f=Find, x)
+
+
+#http://www.rmanchester.org/presentations/2013/05/ManchesterR_-_FP_in_R_-_David_Springate_-_20130502.pdf
+
+'+'(1,2)
+':'(1,10)
