@@ -95,4 +95,20 @@ table<- data.frame(population=c(100, 300, 5000, 2000, 900, 2500),
 table
 table$size <- findInterval(table$population, c(0, 500, 1000, 2000, 3000, 5000), rightmost.closed = TRUE)
 table
->>>>>>> 50c058778f06851438b41e2cc02aecbdfb90c903
+#>>>>>>> 50c058778f06851438b41e2cc02aecbdfb90c903
+
+x=c(1,NA,2,3)
+dplyr::if_else(x%%2==0, "Multiple of 2", "Not a multiple of 2", "Missing")
+
+
+#sqldf package----
+df=data.frame(k=c(2,NA,3,4,5))
+#library(sqldf)
+sqldf::sqldf(
+  "SELECT *,
+  CASE WHEN (k%2)=0  THEN 'Multiple of 2'
+  WHEN  k is NULL  THEN 'Missing'
+  ELSE 'Not a multiple of 2'
+  END AS T
+  FROM df"
+)

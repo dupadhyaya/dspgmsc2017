@@ -444,3 +444,21 @@ passfail = function(x) {
     cat('Fail ')
   }
 }
+
+
+# String
+
+load('./data/du3.RData')
+df2
+subset(df2, select = rpgm:stats)
+subset(df2, age > 28, select = c(name, city, gender))
+subset(df2, hostel, select = - email)
+subset(df2, !hostel, select = - email)
+subset(df2, age > 28, select = c(name, city, gender)
+       drop=c(email, age))
+
+
+# Recode ----
+ 
+rpgmcode <- car::recode(df2$rpgm, "lo:70=1; 71:80=2;else = 3")
+rpgmcode
