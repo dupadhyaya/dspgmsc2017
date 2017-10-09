@@ -1,5 +1,6 @@
 #aggregate1
 
+
 rm(list=ls())
 load(file='./data/du3.Rdata')
 df2
