@@ -8,9 +8,9 @@
 #but it is actually quite simple.
 
 
-x <- 1:20
+(x <- 1:20)
 #A factor (of the same length!) defining groups:
-y <- factor(rep(letters[1:5], each = 4))
+(y <- factor(rep(letters[1:5], each = 4)))
 #Add up the values in x within each subgroup defined by y:
 cbind(x, y)
 
@@ -23,3 +23,6 @@ tapply(x, y, sum)
 #tapply is similar in spirit to the split-apply-combine
 #functions that are common in R (aggregate, by, ave, ddply, etc.)
 #Hence its black sheep status.
+
+tapply(iris$Sepal.Length, iris$Species, mean)
+tapply(mtcars$mpg, mtcars$cyl, sd)

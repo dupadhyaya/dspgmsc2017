@@ -63,3 +63,14 @@ colMeans(m)
 # trimming data
 mean(m[,1])
 mean(m[,1],trim=0.5)
+
+
+a1 = array(1:(5*4*3), dim=c(5,4,3))
+a1
+#5 rows, 4 cols, 3 matrices
+apply(a1, 1, sum)
+apply(a1, 2, sd)
+apply(a1, c(1,2), mean)
+apply(a1, c(2,3), mean)
+apply(a1, c(3), mean)
+

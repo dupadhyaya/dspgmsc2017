@@ -1,7 +1,8 @@
 #with by
 #functions that can help write simpler and more efficient code.
 
-#by function, as stated in the documentation can be though, as a "wrapper" for tapply. The power of by arises when we want to compute a task that tapply can't handle. One example is this code:
+#by function, as stated in the documentation can be though, 
+#as a "wrapper" for tapply. The power of by arises when we want to compute a task that tapply can't handle. One example is this code:
 
 (ct <- tapply(iris$Sepal.Width , iris$Species , summary ))
 (cb <- by(iris$Sepal.Width , iris$Species , summary ))
