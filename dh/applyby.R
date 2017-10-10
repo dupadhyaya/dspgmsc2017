@@ -4,8 +4,8 @@ mtcars
 # we can take am, gear or carb as factors
 by(data, INDICES, FUN, ..., simplify = TRUE)
 split(mtcars, mtcars$am)
-
-by(mtcars$mpg,mtcars$am, FUN=sum )
+mtcars$am; mtcars$mpg
+by(mtcars$mpg,mtcars$am, FUN=mean )
 
 # wrapper for tapply
 by(warpbreaks[, 1:2], warpbreaks[,"tension"], summary)

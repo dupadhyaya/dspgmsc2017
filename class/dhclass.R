@@ -298,6 +298,8 @@ str(df6a)
 df2
 aggregate(df2, by=list(course,gender), FUN=sum)  #incorrect
 aggregate(df2$fees, by=list(df2$course, df2$gender), FUN=sum)  #correct
+aggregate(df2[c('rpgm', 'sql')], by=list(df2$course), FUN=sum)  #correct
+
 aggregate(df2$fees, by=list(df2$course, df2$gender), FUN=mean)  #correct
 
 df5 = df2[,c('gender','hostel', 'course','fees','rpgm','stats', 'excel', 'sql')]

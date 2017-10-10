@@ -9,9 +9,11 @@ A<-c(1,3,5,7,9)
 B<-c(0,3,6,9,12)
 C<-list(x=1, y=2)
 D<-function(x){x+1}
+ls()
 lsf.str()
 
 eapply(.GlobalEnv, is.function)
 #$D - TRUE being function , $A- FALSE
 #if you are building a lot of packages or 
 #create a lot of environments it may come in handy.
+unlist(eapply(.GlobalEnv, is.vector))

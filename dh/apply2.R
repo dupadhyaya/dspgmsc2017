@@ -3,7 +3,8 @@
 #vapply - When you want to use sapply but perhaps need to squeeze some more speed out of your code.
 
 #For vapply, you basically give R an example of what sort of thing 
-#your function will return, which can save some time coercing returned values to fit in a single atomic vector.
+#your function will return, which can save some time 
+#coercing returned values to fit in a single atomic vector.
 
 (x <- list(a = 1, b = 1:3, c = 10:100))
 

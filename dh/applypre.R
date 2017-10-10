@@ -1,7 +1,7 @@
 # Before Apply
 #https://csgillespie.github.io/efficientR/programming.html#the-apply-family
 
-(m1 = matrix(1:24, nrow=4))
+(m1 = matrix(1:16, nrow=4))
 
 #mean
 mean(m1[1,])
@@ -10,6 +10,9 @@ mean(m1[2,])
 # mean using addmargins
 addmargins(m1,1,mean)
 addmargins(m1,2,mean)
+addmargins(m1,c(1,2),mean)
+addmargins(m1)
+
 
 #using for loop
 for( i in 1:4) {
@@ -30,5 +33,5 @@ for( i in 1:ncol(m1)) {
 
 # Better way to do
 apply(m1, 1, mean)  # row means
-apply(m1, 2, mean)  # row means
+apply(m1, 2, mean)  # col means
 
