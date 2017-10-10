@@ -20,7 +20,12 @@ tapply(iris, iris$Species, summary )
 #by function R dispatch a specific method for data frame class and
 #then let the summary function works even if the length of the first argument (and the type too) are different.
 
-(bywork <- by(iris, iris$Species, summary ))
+#Sums the 1st elements, the 2nd elements, etc. 
+mapply(sum, 1:5, 1:5, 1:5) 
+[1]  3  6  9 12 15
+#To do rep(1,4), rep(2,3), etc.
+mapply(rep, 1:4, 4:1)   
+
 
 # object of class by that along Species (say, for each of them) computes the summary of each variable.
 # 
