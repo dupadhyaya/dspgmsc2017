@@ -1,0 +1,147 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+summary(mtcars)
+```
+
+```{r}
+library(abind, pos=18)
+```
+
+
+```{r}
+library(e1071, pos=19)
+```
+
+```{r}
+numSummary(df2[,"a", drop=FALSE], statistics=c("mean", "sd", "IQR", 
+  "quantiles", "skewness"), quantiles=c(0,.25,.5,.75,1), type="2")
+```
+
+```{r}
+set.seed(52410)
+```
+
+```{r}
+qnorm(c(.4), mean=0, sd=1, lower.tail=TRUE)
+```
+
+```{r}
+summary(df)
+```
+
+```{r}
+with(df2, Hist(excel, groups=course, 
+  scale="frequency", breaks="Sturges", col="darkgray", 
+  xlab="X", ylab="Y", main="Title"))
+```
+
+```{r}
+local({
+  .Table <- xtabs(~city+course, data=df2)
+  cat("\nFrequency table:\n")
+  print(.Table)
+  .Test <- chisq.test(.Table, correct=FALSE)
+  print(.Test)
+})
+```
+
+```{r}
+local({
+  .Table <- xtabs(~gender+hostel+city, data=df2)
+  cat("\nFrequency table:\n")
+  print(.Table) 
+})
+```
+
+```{r}
+Dataset <- 
+  read.table("E:/rWork/rdata/Student Attnd Marks.csv", 
+  header=TRUE, sep="", na.strings="NA", dec=".", 
+  strip.white=TRUE)
+```
+
+```{r}
+Dataset <- read.table("E:/rWork/rdata/dbacs4.csv", 
+  header=TRUE, sep="", na.strings="NA", dec=".", 
+  strip.white=TRUE)
+```
+
+```{r}
+Dataset <- 
+  read.table("E:/rWork/rProjects/dspgmsc2017/data/student.csv",
+   header=TRUE, sep="", na.strings="NA", dec=".", 
+  strip.white=TRUE)
+```
+
+```{r}
+Dataset <- 
+  read.table("E:/rWork/rProjects/dspgmsc2017/data/student.csv",
+   header=TRUE, sep="", na.strings="NA", dec=".", 
+  strip.white=TRUE)
+```
+
+```{r}
+summary(student)
+```
+
+
+```{r}
+local({
+  .Table <- xtabs(~batch+city, data=student)
+  cat("\nFrequency table:\n")
+  print(.Table)
+  .Test <- chisq.test(.Table, correct=FALSE)
+  print(.Test)
+})
+```
+
+```{r}
+local({
+  .Table <- with(student, table(gender))
+  cat("\ncounts:\n")
+  print(.Table)
+  cat("\npercentages:\n")
+  print(round(100*.Table/sum(.Table), 2))
+})
+```
+
+```{r}
+sapply(student, function(x)(sum(is.na(x)))) 
+  # NA counts
+```
+
+
+```{r}
+cor(student[,c("cbnst","cgpa")], use="complete")
+```
+
+```{r}
+normalityTest(~java, test="shapiro.test", 
+  data=student)
+```
+
+```{r}
+with(student, (t.test(age, alternative='less', mu=30, 
+  conf.level=.95)))
+```
+
