@@ -167,3 +167,11 @@ pnorm(q=0.96, lower.tail = T)
 
 #Q10 : P(-2.31 < Z  ≤ 0.82)
 (perc = pnorm(q=-2.31) - pnorm(q=0.82))
+
+
+#Quiz 3
+
+#Q1 : mean=200 ; sd=40; x1>=250 ; P(x>250)
+mean=200 ; sd=40; x1=250
+1-pnorm(q=x1, mean, sd)
+pnorm(q=x1, mean, sd, lower.tail = F)
