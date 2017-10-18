@@ -61,11 +61,12 @@ with(data=mtcars, aggregate(by=list(cyl), FUN=mean))
 by(x=mtcars, mtcars$am, function(x) mean(x))
 
 
+load('./data/du3.RData')
+str(df2)
+by(df2, df2$course, FUN=summary)
+by(df2[,'sql'], df2$gender, FUN=function(x) mean(x))
 
-
-
-
-
+names(df2)
 #with ------
 #applys an expression to a dataset. I
 # with(data, expression)

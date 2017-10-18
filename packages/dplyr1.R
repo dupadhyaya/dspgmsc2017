@@ -1,6 +1,8 @@
 # dplyr2
 
 library(dplyr)
+
+mssleep
 x = rnorm(100,50,30)
 glimpse(x) # nice summary,
 tbl_df(x)# compact viewing,

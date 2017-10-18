@@ -41,3 +41,32 @@ dataPoints_Trans2
 
 #NB: for this simple example the same result can of course be achieved more easily by
 apply(dataPoints, 2, scale)
+
+
+?attitude
+dim(attitude)
+head(attitude)
+(med.att <- apply(attitude, 2, median))
+?sweep(data.matrix(attitude), 2, med.att)  
+# subtract the column medians
+
+## More sweeping:
+#Create a array of values 1 to 24 with 3 dimension - 4,3,2
+(A <- array(1:24, dim = 4:2))
+
+## no warnings in normal use
+#Subtract 5 from each row value
+sweep(A, 1, 5)
+(A.min <- apply(A, 1, min))  # == 1:4
+sweep(A, 1, A.min)
+apply(A, 1:2, median)
+sweep(A, 1:2, apply(A, 1:2, median))
+
+## warnings when mismatch
+sweep(A, 1, 1:3)  # STATS does not recycle
+sweep(A, 1, 6:1)  # STATS is longer
+
+## exact recycling:
+sweep(A, 1, 1:2)  # no warning
+sweep(A, 1, as.array(1:2))  # warning
+as.array(1,2)
