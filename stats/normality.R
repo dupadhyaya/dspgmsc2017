@@ -7,6 +7,10 @@ library(moments)
 library(nortest)
 library(e1071)
 
+
+
+
+
 set.seed(777)
 x <- rnorm(250,10,1)
 
