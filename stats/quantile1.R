@@ -5,6 +5,8 @@ x = ceiling(rnorm(100,50,10))
 x
 #Quartile
 quantile(x , c(0.25, 0.5, 0.75))
+sort(x)
+quantile(x)
 IQR(x)
 Q1 = quantile(x , 0.25)
 (Q2 = quantile(x , 0.5))
@@ -25,3 +27,7 @@ summary(x)
 
 fivenum(x)
 
+summary(x)
+
+plot(density(x))
+hist(x)

@@ -13,3 +13,10 @@
 # colMins	 calculates minimum values in each column,
 # colProds	 computes product of all values in each column,
 # colQuantiles	 computes quantiles of each column.
+
+library(timeSeries)
+mtcars
+colQuantiles(mtcars)
+colSkewness(mtcars)
+?colQuantiles
+colStats(mtcars,mean)
