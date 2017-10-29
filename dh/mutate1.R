@@ -1,5 +1,6 @@
 # Mutate : add new, Add new without old
-#Mutate adds new variables and preserves existing; transmute drops existing variables.
+#Mutate adds new variables and preserves existing; 
+#transmute drops existing variables.
 
 library(dplyr)
 
