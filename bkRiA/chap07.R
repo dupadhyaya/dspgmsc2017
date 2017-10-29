@@ -12,7 +12,7 @@ rm(list=ls())
 # Descriptive Statistics --------------------------------------------------
 
 #attach(cars) ;detach(cars)
-mtcars
+?mtcars
 str(mtcars)
 vars = c('mpg','hp','wt') # vector of variable names
 vars
@@ -27,7 +27,7 @@ summary(mtcars)
 summary(mtcars[vars])
 # use apply or sapply to provide Descriptive Stats
 ?sapply # apply function of list or  Vector
-sapply(x, FUN, options)
+#sapply(x, FUN, options)
 sapply(mtcars[vars],mean)
 sapply(mtcars,fivenum)
 # Other functions - fivenum, sd,var,min,max, median, length, 
@@ -57,7 +57,7 @@ sapply(mtcars[vars], mystats, na.omit=T)
 library(Hmisc)
 describe(mtcars[vars])
 vars
-
+?describe
 library(pastecs)
 stat.desc(mtcars[vars])
 stat.desc(mtcars[vars], basic=T, desc=T, norm=T, p=.95)  # very good function
