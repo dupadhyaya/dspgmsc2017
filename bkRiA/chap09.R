@@ -1,5 +1,38 @@
 #Chapter - 9 : Analysis of Variance ------------------------------------------
 
+fit <- lm(weight ~ height, data=women)
+summary(fit)
+women$weight
+coefficients(fit)
+fit$effects
+cor(fitted(fit), women$weight)
+fitted(fit)
+residuals(fit)
+plot(women$height,women$weight,xlab="Height (in inches)",
+     ylab="Weight (in pounds)")
+abline(fit)
+# Weight = -87 + 3.455 x Height
+
+# Polynomial
+fit2 <- lm(weight ~ height + I(height^2), data=women)
+summary(fit2)
+plot(women$height,women$weight,
+     xlab="Height (in inches)",
+     ylab="Weight (in lbs)")
+lines(women$height,fitted(fit2))
+
+#Plot
+par(mar=c(4,4,3,2))
+library(car)
+car::scatterplot(weight ~ height,
+            data=women,
+            spread=FALSE, lty.smooth=2,
+            pch=19,
+            main="Women Age 30-39",
+            xlab="Height (inches)",
+            ylab="Weight (lbs.)")
+
+
 
 # Student 
 FAC1 = c('s1', 's2', 's3', 's4', 's5')
@@ -77,3 +110,8 @@ lm_mtcars <- lm(mpg ~ wt, mtcars)
 
 library(effects)
 effect("wt", lm_mtcars, xlevels=list(wt = seq(2, 3, 0.1)))
+
+
+
+
+

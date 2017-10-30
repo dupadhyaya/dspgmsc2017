@@ -21,7 +21,7 @@ rt(n, df, ncp)
 
 data_vector <- c(63, 75, 84, 58, 52, 96, 63, 55, 76, 83)
 data_vector
-dfs <- length(data_vector)-1   #dof
+(dfs <- length(data_vector)-1)   #dof
 dfs
 x_ <- seq(-8,8,0.1)  # x axis points
 x_
