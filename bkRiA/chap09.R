@@ -3,6 +3,7 @@
 fit <- lm(weight ~ height, data=women)
 summary(fit)
 women$weight
+women
 coefficients(fit)
 fit$effects
 cor(fitted(fit), women$weight)
@@ -20,6 +21,10 @@ plot(women$height,women$weight,
      xlab="Height (in inches)",
      ylab="Weight (in lbs)")
 lines(women$height,fitted(fit2))
+
+fit3 <- lm(weight ~ height + I(height^2) + I(height^3), data=women)
+summary(fit3)
+
 
 #Plot
 par(mar=c(4,4,3,2))

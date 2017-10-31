@@ -6,8 +6,10 @@ Y = c(3.7,3.9,6.7,9.5,3.4,5.6,3.7, 2.7,5.5,2.9,10.7,7.6,11.8,4.1 )
 
 cor.test(X,Y)
 #Plot
-plot(X,Y, main=' Plot between X and Y')
-abline(lm(Y ~ X), col='red')
+plot(x=X,y=Y, main=' Plot between X and Y')
+abline(lm(Y ~ X), col='blue')
+text(x=X,y=Y,labels=paste0(X,Y),cex=.7, col='red')
+?text
 fit =lm(Y ~ X)
 summary(fit)
 
@@ -45,3 +47,9 @@ p = 1 # No of IV Variables
 (MSE = SSE/(n-p-1))
 (Fstats = MSR/MSE)
 summary(fit)
+
+
+
+
+
+
