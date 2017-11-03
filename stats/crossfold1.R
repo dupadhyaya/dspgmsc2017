@@ -12,7 +12,7 @@ apply(df, 2, function(x) length(unique(x)))
 
 #Create train & test data
 library(caTools)
-Library(caret)
+library(caret)
 (ind = createDataPartition(df$Species, p = 2/3, list=F))
 (trainDF = df[ind,])  
 (testDF = df[-ind,])  
@@ -41,3 +41,4 @@ names(getModelInfo())
 modelRandom = train(Species ~ . , data = trainDF, 
       method='rf', trControl = ControlParameters, 
       tuneGrid = parameterGrid) 
+
