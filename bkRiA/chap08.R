@@ -67,3 +67,29 @@ car::scatterplotMatrix(mydata, spread=FALSE, lty.smooth=2,
      main="Scatter Plot Matrix"    )
 fit = lm(mpg ~ cyl + hp + wt + gear + carb, data= mydata)
 summary(fit)
+
+
+
+#8.6.1 Comparing Models
+library(MASS)
+?state.x77
+str(state.x77)
+class(state.x77)
+
+head(state.x77)
+states = as.data.frame(state.x77[,c('Murder','Population',
+         'Illiteracy', 'Income', 'Frost') ])
+fit1 = lm(Murder ~Population + Illiteracy + Income + Frost, data=states)         
+fit2 = lm(Murder ~Population + Illiteracy , data=states)         
+anova(fit2,fit1)
+
+# AIC
+fit1 = lm(Murder ~Population + Illiteracy + Income + Frost, data=states)         
+fit2 = lm(Murder ~Population + Illiteracy, data=states)         
+
+AIC(fit1, fit2)
+
+fit1 = lm(Murder ~Population + Illiteracy + Income + Frost, data=states)         
+fit2 = lm(Murder ~Population + Illiteracy + Income, data=states)         
+
+AIC(fit1, fit2)
