@@ -48,6 +48,17 @@ plot(women$height,women$weight,
      ylab="Weight (in lbs)")
 lines(women$height,fitted(fit2))
 
+
+#8.3.2 -----
+fit2 = lm(weight ~ height + I (height ^ 2), data = women)
+par(mfrow=c(2,2))
+plot(fit2)
+    
+newfit = lm(weight ~ height + I (height ^ 2), data = women[-c(13,15),])
+par(mfrow=c(2,2))
+plot(newfit)
+
+
 #Plot
 par(mar=c(4,4,3,2))
 library(car)
@@ -68,7 +79,18 @@ car::scatterplotMatrix(mydata, spread=FALSE, lty.smooth=2,
 fit = lm(mpg ~ cyl + hp + wt + gear + carb, data= mydata)
 summary(fit)
 
+#8.5 ----
+library(car)
+summary(powerTransform(states$Murder))
 
+fit = lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+par(mar=c(3,2,2,2))
+qqPlot(fit, labels=row.names(states),  id.method='identity',
+       simulate=T, main='Q-Q Plot')
+
+car::boxTidwell( Murder ~ Population
+                 + Illiteracy , data= states)
+car::spreadLevelPlot(fit)
 
 #8.6.1 Comparing Models
 library(MASS)
