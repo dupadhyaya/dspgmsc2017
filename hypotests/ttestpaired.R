@@ -40,3 +40,15 @@ qt(1-0.05/2,df=n-1); qt(0.05/2,df=n-1)
 # p value > 0.05;  p-value (0.205) is greater than the signif level (0.05), we cannot reject Ho.
 # conf Interval : mean of diff lies betw conf intervals
 
+meanx= 70
+sdx = 10
+nx=10
+x1 = rnorm(n=n,mean=meanx, sd=sdx)
+x1
+mean(x1)
+sd(x1)
+x2 = rnorm(10)
+x2 = sdx*(x2-mean(x2)) /sd(x2)+70
+mean(x2)
+sd(x2)
+help(distributions)
