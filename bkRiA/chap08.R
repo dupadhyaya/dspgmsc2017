@@ -115,3 +115,41 @@ fit1 = lm(Murder ~Population + Illiteracy + Income + Frost, data=states)
 fit2 = lm(Murder ~Population + Illiteracy + Income, data=states)         
 
 AIC(fit1, fit2)
+
+
+#All Subsets Regression
+library(leaps)
+states = as.data.frame(state.x77[,c('Murder','Population',
+'Illiteracy', 'Income', 'Frost') ])
+
+leaps = regsubsets(Murder ~Population + Illiteracy + Income + Frost, data=states, nbest=4)
+plot(leaps, scale='adjr2')
+
+library(car)
+subsets(leaps, statistics = 'cp', main='Cp plot for all subsets Regression')
+abline(1,1, lty=2, col='red')
+
+
+
+#8.7.2 Cross Validation
+
+shrinkage = function(fit, k=10) {
+require(bootstrap)
+theta.fit = function(x,y) { lsfit(x,y)}
+theta.product = function(fit, x) {cbind(1,x) %x% fit $coef}
+x = fit$model[,2:ncol(fit$model)]
+y = fit$model[,1]
+results = crossprod(x,y, theta.fit, theta.product, ngroup=k)
+r2 = cor(y, results$cv.fit)^2
+cat("Original R Square =", r2, '\n')
+cat(k, " Fold Cross Validated R Square =", r2cv, '\n')
+cat(' Change = ', r2-r2cv , '\n')
+}
+
+states = as.data.frame(state.x77[,c('Murder','Population',
+      'Illiteracy', 'Income', 'Frost') ])
+fit = lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)         
+shrinkage(fit)
+
+fit2 = lm(Murder ~ Population + Illiteracy, data=states)         
+shrinkage(fit2)

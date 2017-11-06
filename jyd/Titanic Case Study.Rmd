@@ -1,0 +1,361 @@
+---
+title: "Exploring the Titanic Dataset"
+author: "Jayadeep"
+date: "1 Nov 2017"
+output:
+  html_document:
+    fig_height: 4.5
+    fig_width: 7
+    highlight: tango
+    number_sections: yes
+    theme: readable
+    toc: yes
+  pdf_document:
+    toc: yes
+---
+
+# Introduction
+
+**Problem Description:**
+The sinking of the RMS Titanic is one of the most infamous shipwrecks in history. On April 15, 1912, during her maiden voyage, the Titanic sank after colliding with an iceberg, killing 1502 out of 2224 passengers and crew. 
+
+One of the reasons that the shipwreck led to such loss of life was that there were not enough lifeboats for the passengers and crew. Although there was some element of luck involved in surviving the sinking, some groups of people were more likely to survive than others, such as women, children, and the upper-class.
+
+**Task:**
+
+* Analyze what sorts of people were likely to survive
+* Apply the tools of machine learning to predict which passengers survived the tragedy
+
+
+Following are the main parts of our analysis:
+
+* Missing value imputation
+* Exploratory analysis and Feature engineering
+* Prediction!
+
+## Load and check data
+
+```{r,message=FALSE,warning=FALSE}
+# Load packages
+library('ggplot2') # visualization
+library('ggthemes') # visualization
+library('scales') # visualization
+library('dplyr') # data manipulation
+library('caTools') # Spliting data
+library('rms') # For step wise regression
+```
+
+Now that our packages are loaded, let's read in and take a peek at the data.
+
+```{r}
+# Set Working Directory
+# Read Data
+dataset <- read.csv("/data/train.csv",stringsAsFactors = F,na = "")
+# First few entries of the data
+head(dataset)
+```
+
+
+```{r,warning=FALSE}
+# check data - str is structure of the data
+str(dataset)
+```
+
+
+We've got a sense of our variables, their class type, and the first few observations of each. We know we're working with 891 observations of 12 variables. To make things a bit more explicit since a couple of the variable names aren't 100% illuminating, here's what we've got to deal with:
+
+Variable Name | Description
+--------------|-------------
+Survived      | Survived (1) or died (0)
+Pclass        | Passenger's class
+Name          | Passenger's name
+Sex           | Passenger's sex
+Age           | Passenger's age
+SibSp         | Number of siblings/spouses aboard
+Parch         | Number of parents/children aboard
+Ticket        | Ticket number
+Fare          | Fare
+Cabin         | Cabin
+Embarked      | Port of embarkation
+
+
+# Missing value imputation
+```{r}
+# is there any Missing obesrvation
+colSums(is.na(dataset))
+```
+
+Summary shows, 177 age observations are missing, Cabin too have a lot of missing values and embarked just 2.
+
+* Replace Embarked by most frequent observation:
+
+```{r}
+table(dataset$Embarked)
+```
+
+```{r}
+dataset$Embarked[is.na(dataset$Embarked)]="S"
+table(dataset$Embarked)
+```
+
+As Age and Cabin have too many missing values, we will check it during the analysis Phase.
+
+Check the length and see how many varibles can move to factor for our analysis.
+```{r}
+apply(dataset,2, function(x) length(unique(x)))
+```
+
+Will convert the below varibles into factors for ananlysis:
+```{r}
+cols=c("Survived","Pclass","Sex","Embarked")
+for (i in cols){
+  dataset[,i]=as.factor(dataset[,i])
+}
+```
+
+
+# Exploratory analysis and Feature engineering
+## Exploratory Analysis on Pclass: Are Rich people more likely to survive?
+
+Hypothesis is that, survival rate for **Rich** folks is much higher than **poor** people, Does any diffrence in the Titanic?  
+
+Visualize Pclass which is the best proxy for Rich and Poor.
+
+```{r}
+ggplot(dataset,aes(x=Pclass,fill=factor(Survived))) +
+geom_bar()+
+ggtitle("Pclass v/s Survival Rate")+
+xlab("Pclass") +
+ylab("Total Count") +
+labs(fill = "Survived")  
+```
+
+No diffrence in the Titanic too, First class Survival rate is far better than the third class.
+
+## Exploratory Analysis on Gender: Are Female more likely to survive?
+Hypothesis, **gender** and survival rate are related.
+```{r}
+ggplot(dataset, aes(x = Sex, fill = Survived)) +
+geom_bar() +
+ggtitle("Gender vs survival") +
+xlab("Sex") +
+ylab("Total Count") +
+labs(fill = "Survived")
+```
+
+Female survival rate is much higher than Male.
+
+
+Visualize the 3-way relationship of sex, pclass, and survival
+```{r}
+ggplot(dataset, aes(x = Sex, fill = Survived)) +
+geom_bar() +
+facet_wrap(~Pclass) + 
+ggtitle("3D view of sex, pclass, and survival") +
+xlab("Sex") +
+ylab("Total Count") +
+labs(fill = "Survived")
+```
+
+
+## Exploratory Analysis on Name
+```{r}
+head(dataset$Name)
+```
+
+Lets extract the title and check if we have predictive power in that - 
+```{r}
+# Grab title from passenger names
+names <- dataset$Name
+title <-  gsub("^.*, (.*?)\\..*$", "\\1", names)
+dataset$Title <- title
+
+# Show title counts by sex
+table(dataset$Sex, dataset$Title)
+```
+Miss, Mrs, Master and Mr are taking more numbers.
+Creating a new varible with small data can cause overfitting.
+Better to group Other titles into bigger basket by checking gender and survival rate to avoid any overfitting.
+
+
+```{r}
+# Army folks, doctors and nobel people to be combined in one group - "Officer" level
+officer <- c('Capt', 'Col', 'Don', 'Dr', 'Major', 'Rev', 'Sir', 'Jonkheer', 'the Countess')
+dataset$Title[dataset$Title %in% officer]  <- 'Officer'
+
+# Also reassign mlle, ms, and mme accordingly
+dataset$Title[dataset$Title == 'Mlle']        <- 'Miss' 
+dataset$Title[dataset$Title == 'Ms']          <- 'Miss'
+dataset$Title[dataset$Title == 'Lady']         <- 'Miss' 
+dataset$Title[dataset$Title == 'Dona']         <- 'Miss' 
+dataset$Title[dataset$Title == 'Mme']         <- 'Mrs' 
+
+# Show title counts by sex again
+table(dataset$Sex, dataset$Title)
+```
+
+```{r}
+# Lets check Title vs survival rate
+ggplot(dataset,aes(x = Title,fill=factor(Survived))) +
+geom_bar() +
+ggtitle("Title V/S Survival rate")+
+xlab("Title") +
+ylab("Total Count") +
+labs(fill = "Survived") 
+```
+
+So in the titanic, if you are a Mr then there is less chance of survival, Miss and Mrs have better survival rate than Master and Officer.
+
+```{r}
+# Visualize the 3-way relationship of Title, Pclass, and Survival
+
+ggplot(dataset, aes(x = Title, fill = Survived)) +
+  geom_bar() +
+  facet_wrap(~Pclass) + 
+  ggtitle("3-way relationship of Title, Pclass, and Survival") +
+  xlab("Title") +
+  ylab("Total Count") +
+  labs(fill = "Survived")
+```
+
+Since Title is mostly dependent on the Age (except few cases), I will use title as a proxy for age.
+
+## Exploratory Analysis on Family : Do families sink or swim together?
+First we're going to make a family size variable based on number of siblings/spouse(s) (maybe someone has more than one spouse?) and number of children/parents.
+
+```{r}
+# Create a family size variable including the passenger themselves
+dataset$Fsize <- dataset$SibSp + dataset$Parch + 1
+
+# Use ggplot2 to visualize the relationship between family size & survival
+ggplot(dataset, aes(x = Fsize, fill = Survived)) +
+  geom_bar() +
+  ggtitle("Family Size V/S Survival Rate") +
+  xlab("FamilySize") +
+  ylab("Total Count") +
+  labs(fill = "Survived")
+```
+
+We can see that there's a survival penalty to singletons and those with family sizes above 4. We can collapse this variable into three levels which will be helpful since there are comparatively fewer large families. Let's create a discretized family size variable.
+
+```{r}
+# Discretize family size
+dataset$FsizeD[dataset$Fsize == 1] <- 'singleton'
+dataset$FsizeD[dataset$Fsize < 5 & dataset$Fsize > 1] <- 'small'
+dataset$FsizeD[dataset$Fsize > 4] <- 'large'
+
+ggplot(dataset, aes(x = FsizeD, fill = Survived)) +
+  geom_bar() +
+  ggtitle("Family Size V/S Survival Rate") +
+  xlab("FamilySize") +
+  ylab("Total Count") +
+  labs(fill = "Survived")
+```
+
+The plot shows that there is a survival penalty among singletons and large families.
+
+## Exploratory Analysis on Embarked
+```{r}
+###is there any association between Survial rate and where we get into the Ship.   
+ggplot(dataset,aes(x = Embarked,fill=factor(Survived))) +
+geom_bar() +
+ggtitle("Embarked vs Survival") +
+xlab("Embarked") +
+ylab("Total Count") +
+labs(fill = "Survived") 
+```
+
+# Prediction
+
+## Split into training & test sets
+
+* Divide data into train and test set for internal validation
+```{r}
+# Set a random seed
+set.seed(123)
+
+split = sample.split(dataset$Survived, SplitRatio = 0.80)
+
+training_set = subset(dataset, split == TRUE)
+test_set = subset(dataset, split == FALSE)
+
+# Structure of the data
+str(training_set)
+```
+
+## Building the model
+We then build our model using logistic regression on the training set.
+
+```{r}
+# Build the model (note: not all possible variables are used)
+LogReg_model <- glm(factor(Survived) ~ Pclass + Sex + SibSp + Parch + Fare + Embarked +                       Title + FsizeD, data = training_set, family = binomial)
+
+summary(LogReg_model)
+```
+
+```{r}
+# Backward Elimination to choose the predictors - Iternation 2 - Sex removed
+LogReg_model <- glm(factor(Survived) ~ Pclass + SibSp + Parch + Fare + Embarked + Title + FsizeD,
+                    data = training_set, family = binomial)
+
+summary(LogReg_model)
+```
+
+```{r}
+# Iteration 3 - Embarked Removed
+LogReg_model <- glm(factor(Survived) ~ Pclass + SibSp + Parch + Fare + Title + FsizeD,
+                                      data = training_set, family = binomial)
+
+summary(LogReg_model)
+```
+
+```{r}
+# Iteration 4 - SibSp removed
+LogReg_model <- glm(factor(Survived) ~ Pclass + Parch + Fare + Title + FsizeD,
+                                      data = training_set, family = binomial)
+
+summary(LogReg_model)
+```
+
+```{r}
+# Iteration 5 - Parch removed
+LogReg_model <- glm(factor(Survived) ~ Pclass + Fare + Title + FsizeD,
+                                      data = training_set, family = binomial)
+
+summary(LogReg_model)
+```
+
+```{r}
+# Iteration 6 - Fare removed
+LogReg_model <- glm(factor(Survived) ~ Pclass + Title + FsizeD,
+                                      data = training_set, family = binomial)
+
+summary(LogReg_model)
+```
+Final Set of Variable: **Pclass**,**Title**,**FsizeD**
+
+
+Find set of variables using backward variable selection:
+```{r,message=FALSE}
+attach(training_set)
+# Fast backward Selection 
+fullmodel <- fastbw(lrm(factor(Survived) ~ Pclass + Sex + SibSp + Parch + Fare + Embarked + Title + FsizeD)                     ,rule="p")
+fullmodel
+```
+
+```{r}
+# Predicting the Test set results
+prob_pred = predict(LogReg_model, type = 'response', newdata = test_set[c("Pclass","Title","FsizeD")])
+Survived_pred = ifelse(prob_pred > 0.5, 1, 0)
+
+# Making the Confusion Matrix
+cm = table(test_set$Survived, Survived_pred)
+cm
+```
+
+```{r}
+# Accuracy
+Accuracy = (96+51)/length(test_set$Survived)
+Accuracy
+```
+

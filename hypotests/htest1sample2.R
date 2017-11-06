@@ -23,12 +23,16 @@ z.test(42,mu=45,alternative="two.sided",n=20,sd=5)
 
 
 # Q5 ----------------------------------------------------------------------
-#The nine items of a sample had the following items. 45,47,50,52,48,47,49,53,51 .  Does the mean of nine items differ significantly from the assumed population mean of 47.5
+#The nine items of a sample had the following items. 45,47,50,52,48,47,49,53,51 .
+#  Does the mean of nine items differ significantly from the assumed population mean of 47.5
 #N = 9 (N<30) we use t-test.  Ho : μ = 47.5  Ha : μ ≠ 47.5 (Two Tailed t test) 
 qt(.975,df=8) #[1] 2.306004
 x = c(45,47,50,52,48,47,49,53,51)
 t.test(x, alternative="two.sided",mu=47.5,conf.level = .95)
-
+t.test(x,mu=47.5,conf.level = .95)
+t.test(x,mu=47.5)
+qt(p=.95+.05/2,df=length(x)-1)
+mean(x)
 #|t* = 1.8452 | < tα/2  : Do not reject Ho
 #Sample Mean between confidence interval
 
