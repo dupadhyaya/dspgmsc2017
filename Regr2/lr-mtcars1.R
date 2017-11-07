@@ -5,6 +5,9 @@
 str(mtcars)
 names(mtcars)
 dim(mtcars)
+table(mtcars$am)
+addmargins(table(mtcars$am))
+
 #Blank Model----
 (mtcars.lm = lm(mpg ~ 1, data=mtcars))
 summary(mtcars.lm)
