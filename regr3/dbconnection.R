@@ -11,3 +11,9 @@ dbListFields(con, "Students")
 
 Students <- dbReadTable(con, "Students")
 Students
+
+library(tibble)
+as_tibble(Students)
+
+
+dbWriteTable(con, "Studentnew", as.data.frame(Students))

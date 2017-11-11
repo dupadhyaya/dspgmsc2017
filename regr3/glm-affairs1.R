@@ -50,6 +50,7 @@ ggplot(Affairs.data, aes(occupation)) + geom_bar(width = 0.2) +
                      labels=c("Class 1", "Class 2", "Class 3", "Class 4",
                               "Class 5", "Class 6", "Class 7"))
 
+
 # Plotting the frequency of participants based on education
 ggplot(Affairs.data, aes(education)) + geom_bar(width = 0.2) +
   xlab("Education") + ylab("Frequency") + 

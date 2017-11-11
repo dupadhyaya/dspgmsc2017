@@ -77,6 +77,7 @@ data("women")
 x = women$height
 y = women$weight
 mod1 <- lm(y ~ x)
+plot(mod1)
 plot(x, y, xlim=c(min(x)-5, max(x)+5), ylim=c(min(y)-10, max(y)+10))
 abline(mod1, lwd=2)
 res <- signif(residuals(mod1), 5)
