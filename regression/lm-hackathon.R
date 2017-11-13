@@ -7,7 +7,8 @@ df1=read.csv("./data/student-mat.csv",header=TRUE)
 df1
 names(df1)
 #df1a = df[,c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
-df1G3 = df1[,-c(31,32)]
+df1G3 = df1[,-c(1)]
+
 df1G3
 names(df1G3)
 fitG3 = lm(G3 ~ ., data=df1G3)
@@ -18,13 +19,13 @@ plot(fitG3)
 plot(fitG3, which=1)
 
 fit=fitG3
-durbinWatsonTest(model=fit)
-?durbinWatsonTest
-ncvTest(fit)
-outlierTest(fit)
-scatterplot(fit)
-scatterplotMatrix(fit)
-vif(fit)
+car::durbinWatsonTest(model=fit)
+car::ncvTest(fit)
+car::outlierTest(fit)
+car::scatterplot(fit)
+car::scatterplotMatrix(fit)
+
+?vif(fit)
 
 #residuals Plot
 z = rstudent(fit)
@@ -114,7 +115,7 @@ plot(booteval.relimp(boot,sort=TRUE))
 
 #All Subsets Regression
 library(leaps)
-leaps<-regsubsets(G3 ~ failures + Medu + sex + goout + Mjob + romantic, data=df1G3,nbest=10)
+leaps<-regsubsets(G3 ~ failures + Medu + sex + goout + Mjob + romantic, data=df1G3,nbest=4)
 summary(leaps)
 # plot a table of models showing variables in each model.
 par(mar=c(.5,.5,.5,.5))

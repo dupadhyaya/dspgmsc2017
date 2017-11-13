@@ -80,6 +80,7 @@ mod1 <- lm(y ~ x)
 plot(mod1)
 plot(x, y, xlim=c(min(x)-5, max(x)+5), ylim=c(min(y)-10, max(y)+10))
 abline(mod1, lwd=2)
+
 res <- signif(residuals(mod1), 5)
 pre <- predict(mod1) #
 segments(x, y, x, pre, col="red")
@@ -88,6 +89,40 @@ textxy(x, y, res, cx=0.7)
 # Difference Data Set; try the same thing
 x <- c(173, 169, 176, 166, 161, 164, 160, 158, 180, 187)
 y <- c(80, 68, 72, 75, 70, 65, 62, 60, 85, 92) # plot scatterplot and the regression line
+
+#Different Data
+x <- c(173, 169, 176, 166, 161, 164, 160, 158, 180, 187)
+y <- c(80, 68, 72, 75, 70, 65, 62, 60, 85, 92)
+mod2 <- lm(y ~ x)
+plot(x, y, xlim=c(min(x)-5, max(x)+5), ylim=c(min(y)-10, max(y)+10))
+abline(mod2, lwd=2)
+res <- signif(residuals(mod2), 5)
+pre <- predict(mod2)
+segments(x, y, x, pre, col="red")
+library(calibrate)
+textxy(x, y, res, cx=0.7)
+
+
+
+fit= lm(weight ~ height, data=women)
+plot(x=fitted(fit), y=residuals(fit), main=' Residuals vs Fitted Values')
+lines(loess.smooth(x=fitted(fit), y=residuals(fit)))
+
+scatter.smooth(x=fitted(fit), y=residuals(fit), col='red',
+               lpars= list(col='blue', lwd=3,lty=3))
+points(x=fitted(fit), y=residuals(fit), col='green', pch=20)
+labeltext = paste(rownames(women),paste(paste(women$height, women$weight,sep=','), round(fitted(fit),1),sep='-'), sep='=') 
+labeltext
+text(x=fitted(fit), y=residuals(fit),labeltext, cex=.75)
+plot(fit, which=1)
+text(x=fitted(fit), y=residuals(fit),labeltext, cex=.75)
+
+# 
+plot(lm(dist ~ speed, data = cars), which=1)
+
+y=11:20 ; x=1:10
+plot(x,y)
+plot(lm(y ~ x), which=1)
 
 influencePlot(lm(weight ~ height, data=women), id.method='identify',
               main='Influence PLot' , sub='Circle size is proportional to Cooks Distance' )
@@ -105,3 +140,5 @@ cutoff = 1/ nrow(women) -
 cutoff
 plot(lm(weight ~ height,
         data=women), which=4, cook.levels=cut.off)
+
+
