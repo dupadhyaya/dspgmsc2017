@@ -80,22 +80,23 @@ addmargins(as.matrix(df2), FUN=list(list(sum, sd,length), list(length)))
 str(df2stack)
 mean(df2stack$values)
 
-(c=length(df2))
-(n=nrow(df2stack))
-
 colMeans((df2))
 (x1m = colMeans(df2)[1])
 (x2m = colMeans(df2)[2])
 (x3m = colMeans(df2)[3])
-(x4m = colMeans(df2)[2])
+(x4m = colMeans(df2)[4])
 
 (xm = mean(df2stack$values))
-(n= dim(df2)[1])  # no of values for each supp
+(n1= dim(df2)[1])  # no of values for each supp 5
+(c = dim(df2)[2])  # No of Groups 4
+(n = dim(df2stack)[1])  #No of Observations 4 * 5 = 20
+n1 * (x1m - xm)^2 ; n1 * (x2m - xm)^2 
+n1 * (x3m - xm)^2 ; n1 * (x4m - xm)^2 
 
-(SSA = n * (x1m - xm)^2 + n * (x2m - xm)^2 + n * (x3m - xm)^2  + n * (x4m - xm)^2 ) 
+(SSA = n1 * (x1m - xm)^2 + n1 * (x2m - xm)^2 + n1 * (x3m - xm)^2  + n1 * (x4m - xm)^2 ) 
 (SSW = sum((sup1 - x1m)^2) + sum((sup2 - x2m)^2) + sum((sup3 - x3m)^2) + sum((sup4 - x4m)^2))
-(MSA = SSA / (dim(df)[2]-1))
-(MSW = SSW / (nrow(df2stack)-length(df2)))
+(MSA = SSA / (c-1))
+(MSW = SSW / (n-c))
 (FSTAT = MSA/ MSW)
 
 (FCV = qf(.95, df1 = c-1, df2=n-c))   # F Critical Value
