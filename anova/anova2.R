@@ -126,8 +126,8 @@ plot(TukeyHSD(fit2w))
 par(las=0)
 library(multcomp)
 par(mar=c(5,4,6,2))
-#tuk = glht(fit2w, linfct = mcp(values='Tukey'))
-#plot(cld(tuk, level=.05), col='lightgrey')
+tuk = glht(fit2w, linfct = mcp(ind='Tukey'))
+plot(cld(tuk, level=.05), col='lightgrey')
 
 #Normality Test for DV
 car::qqPlot(lm(values ~ ind, data=df2stack), simulate=T, labels=F)
