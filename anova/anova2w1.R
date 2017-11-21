@@ -27,6 +27,7 @@ apply(df[,2:5], 2, function(x) sum(x))
 apply(df[1:5,2:5], 2, function(x) sum((x-XM)^2))
 apply(df[6:10,2:5], 2, function(x) sum((x-XM)^2))
 df
+
 names(df)
 #stack approach: stack(df) does not work
 (df1a = data.frame(df[1], stack(df[2:ncol(df)])))
@@ -81,7 +82,7 @@ TukeyHSD(parachute.aov2b, which = "variable")
 TukeyHSD(parachute.aov2b, which = "loom")
 
 
-#multcomp::glht(parachute.aov2b, linfct = mcp(loom = 'Tukey'))
+multcomp::glht(parachute.aov2b, linfct = mcp(variable = 'Tukey'))
 
 summary(multcomp::glht(parachute.aov2b, linfct = mcp(df1b$loom = 'Tukey')))
 
@@ -114,15 +115,3 @@ shapiro.test(x = aov_residuals )
 
 
 
-# Question-2
-factorA = c('High', 'High', 'Low','Low')
-factorB1 = c(15, 11, 27, 29)
-factorB2 = c(10, 12, 15, 17)
-factorB3 = c(22, 17, 31, 49)
-df2 = data.frame(motivation=factor(factorA), self=factorB1, cr=factorB2, pc=factorB3)
-df2
-
-
-
-#Q3------
-#Course Types 
