@@ -39,3 +39,28 @@ p1=predict(fit3, newdata = newdata, type='response')
 cbind(mtcars$am, mtcars$wt, mtcars$hp, p1, p1a)
 (xtab = table(mtcars$am, p1a))
 caret::confusionMatrix(xtab)
+
+df= mtcars
+#Manually calc probabilities
+calcp = function(df, x1, x2) {
+df$y = 18.86 + (0.0362 * df[,x1]) - (8.083 * df[,x2])
+df$p = exp(p)/ (1 + exp(p))
+#print(p)
+#return(y)
+}
+calcp('df', 'hp','wt')
+df
+cbind(p1,p2)
+
+
+d <- data.frame(hp=mtcars$hp, wt=mtcars$wt)
+d
+testing <- function (d, x1,x2) {
+  d$y = 18.86 + (0.0362 * d[[x1]]) - (8.083 * df[[x2]])
+  d$p = exp(d$y)/ (1 + exp(d$y))
+  #return (d[[p]])
+  d$p
+}
+
+print (testing(d, 'hp','wt')) 
+d
