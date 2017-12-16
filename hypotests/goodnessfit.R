@@ -8,12 +8,14 @@ data(survey)
 str(survey)
 
 #What are the levels of Smokers. 
- levels(survey$Smoke)
+levels(survey$Smoke)
 
 
 #Create frequency distribution using table command.
 smoke.freq = table(survey$Smoke)
-smoke.freq
+round(prop.table(smoke.freq)* 100,2)
+
+
 
 #Percentage distribution of a given sample data is as follows. 
 #Heavy   Never   Occas   Regul 
@@ -22,7 +24,11 @@ smoke.freq
 #Determine whether the sample data in survey supports Distribution at .05 significance level
 # Ho: Sample Data follows the distribution
 # Ha: Sample Data does not fit the distribution
-smoke.prob = c(.045, .795, .085, .075) 
+(smoke.prob = round(prop.table(smoke.freq),3))
+sum(smoke.prob)
+smoke.prob = c(.045, .795, .085, .075)
+sum(smoke.prob)
+
 smoke.prob
 chisq.test(smoke.freq, p=smoke.prob) 
 

@@ -20,16 +20,6 @@ confusionMatrix(predictions$class, y_test)
 
 # load the library
 
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
 # load the library
 library(caret)
 # load the iris dataset

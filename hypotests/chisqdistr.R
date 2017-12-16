@@ -17,7 +17,7 @@ for (i in 1:10) {
 # Example 2
 
 x <- rchisq(100, 5)
-hist(x, prob=TRUE)
+hist(x, prob=TRUE, ylim=c(0,0.2))
 curve( dchisq(x, df=5), col='green', add=TRUE)
 curve( dchisq(x, df=10), col='red', add=TRUE )
 

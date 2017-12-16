@@ -72,27 +72,28 @@ chisq.test(deptB)$statistic
 
 
 data(survey, package="MASS")
-str(survey)
+str(survey)# Interpret the results
+# p-value > 0.05 : Accept Ho : Sex and Folding are Independent (not related)
+
 table(survey$Sex, survey$Fold)
 (ct3 = chisq.test(x=survey$Sex, y=survey$Fold))           
 ct3$observed; ct3$expected
 
 rbind(ct3$observed, ct3$expected)
 ct3$residuals
-# Interpret the results
-# p-value > 0.05 : Accept Ho : Sex and Folding are Independent (not related)
 
 
 # Example Elections
 #the.data = scan() # Manually entering data
-result = matrix(c(200,150,50,250,300,50), byrow=T, ncol=3)
+(result = matrix(c(200,150,50,250,300,50), byrow=T, ncol=3))
 dimnames(result) = list(gender=c('male','female'), party=c('bjp','cong','aap') )
 result
 #Ho : Gender and Party preference is independent
 #Ha : Gender and Party Preference is related (not independent)
 (ct4 = chisq.test(x=result))
 ct4$observed; ct4$expected
-ct4$statistic; ct4$p.value
+ct4$statistic
+ct4$p.value
 qchisq(1-.05,df=(2-1)*(3-1))
 #pvalue < 0.005 : Reject Ho : Gender -Party are related
 #calc > table : Rejection Region

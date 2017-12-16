@@ -10,3 +10,6 @@ beer.ts.yr <- aggregate(beer.ts, nfrequency=1)
 plot.ts(beer.ts[,2], main = "Monthly Beer Production in Australia", xlab = "Year", ylab = "ML")
 
 plot.ts(beer.ts.qtr[,2], main = "Quarterly Beer Production in Australia", xlab = "Year", ylab = "ML")
+
+
+seasonplot(beer.ts[,2], year.labels = TRUE, year.labels.left=TRUE, col=1:40, pch=19, main = "Monthly Beer Production in Australia - seasonplot", xlab = "Month", ylab = "ML")

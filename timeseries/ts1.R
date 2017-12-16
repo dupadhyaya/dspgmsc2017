@@ -33,3 +33,24 @@ plot(aggregate(AirPassengers,FUN=mean))
 #This will aggregate the cycles and display a year on year trend
 boxplot(AirPassengers~cycle(AirPassengers))
 #Box plot across months will give us a sense on seasonal effect
+
+
+plot(aggregate(AirPassengers,FUN=mean))
+plot(log(AirPassengers))
+abline(reg=lm(log(AirPassengers) ~ time(AirPassengers)))
+
+plot(diff (log(AirPassengers)))
+abline(h=0, col='red')
+abline(reg=lm(diff(log(AirPassengers)) ~ time(AirPassengers)))
+
+
+#Model
+acf(AirPassengers)
+acf(diff (log(AirPassengers)))
+pacf(diff (log(AirPassengers)))
+
+fit = arima(log(AirPassengers), c(0,1,1), seasonal =
+              list(order = c(0,1,1), period = 12) )
+pred = predict(fit, n.ahead = 10 * 12)
+pred1 = 2.718 * pred$pred
+ts.plot(AirPassengers, pred1, log='y', lty=c(1,3))
