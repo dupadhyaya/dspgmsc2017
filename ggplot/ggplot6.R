@@ -101,11 +101,9 @@ ggplot(data=mtcars, aes(x=hp, y=mpg, shape=cyl, col=cyl)) +
 #Eg4 RiA : Singer
 data(singer, package='lattice')
 #histogram
-ggplot(singer, aes(x =height)) +
-  geom_histogram()
+ggplot(singer, aes(x =height)) + geom_histogram()
 #boxplot
-ggplot(singer, aes(x=voice.part, y=height)) +
-  geom_boxplot()
+ggplot(singer, aes(x=voice.part, y=height)) + geom_boxplot()
 
 #Eg5a: RiA : Salaries
 data(Salaries, package='car')
@@ -113,6 +111,7 @@ ggplot(Salaries, aes(x=rank, y=salary)) +
   geom_boxplot( fill='cornflowerblue', color='black', notch=T) +
   geom_point(position='jitter', color='blue', alpha=.5) +
   geom_rug(sides='l', color='black')
+
 #Interpretations
 #1- salaries of 3 ranks differ from each other (No overlap in the box plot notches)
 #2 variance in salaries increases with greater rank, with larger range of salaries for full professors

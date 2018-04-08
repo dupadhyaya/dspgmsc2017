@@ -1,4 +1,5 @@
 # Multiple Regression in R
+mtcars
 (model1 = lm(mpg ~ disp + cyl + hp
             + drat + wt + qsec + carb, data=mtcars))
 
@@ -9,7 +10,9 @@ vcov(model1)
 layout(matrix(c(1,2,3,4),2,2))
 plot(model1)
 
-
+(model1 = lm(mpg ~ disp + cyl + hp
+             + drat + wt + qsec + carb, data=mtcars))
+summary(model1)
 (model2 = lm(mpg ~ disp + cyl + wt , data=mtcars))
 summary(model2)
 

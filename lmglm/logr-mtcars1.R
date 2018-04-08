@@ -4,8 +4,7 @@
 exp(-0.3795)
 (odds = exp(-0.3795))
 anova(base)
-(fit1 = glm(am ~ mpg + disp + hp + wt, data
-            = mtcars, family = binomial() ))
+(fit1 = glm(am ~ mpg + disp + hp + wt, data = mtcars, family = binomial() ))
 fit1
 summary(fit1)
 par(mar=c(1,1,1,1))
@@ -18,8 +17,7 @@ plot(fit1)
 fit2
 
 
-(fit3 = glm(am ~ hp + wt, data=mtcars,
-            family = binomial()))
+(fit3 = glm(am ~ hp + wt, data=mtcars,  family = binomial()))
 
 exp(8.124)
 (p = exp(8.124)/ (1 + exp(8.124)))

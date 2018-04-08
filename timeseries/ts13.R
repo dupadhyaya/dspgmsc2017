@@ -1,6 +1,8 @@
-hsales
-https://www.otexts.org/fpp/6/1
+#House Sales
+3https://www.otexts.org/fpp/6/1
 library(fpp)
+hsales
+data(package='fpp')
 par(mfrow=c(2,2))
 plot(hsales,xlab="Year",ylab="Monthly housing sales (millions)")
 plot(ustreas,xlab="Day",ylab="US treasury bill contracts")

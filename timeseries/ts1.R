@@ -54,3 +54,4 @@ fit = arima(log(AirPassengers), c(0,1,1), seasonal =
 pred = predict(fit, n.ahead = 10 * 12)
 pred1 = 2.718 * pred$pred
 ts.plot(AirPassengers, pred1, log='y', lty=c(1,3))
+

@@ -48,11 +48,13 @@ plot.ts(logsouvenirtimeseries)
 # http://a-little-book-of-r-for-time-series.readthedocs.io/en/latest/src/timeseries.html#decomposing-time-series
 library("TTR")
 kingstimeseriesSMA3 <- SMA(kingstimeseries,n=3)
+plot.ts(kingstimeseries)
 plot.ts(kingstimeseriesSMA3)
 
 kingstimeseriesSMA8 <- SMA(kingstimeseries,n=8)
 plot.ts(kingstimeseriesSMA8)
-
+forecast(kingstimeseriesSMA8,3)
+plot(forecast(kingstimeseriesSMA8,3))
 
 birthstimeseriescomponents <- decompose(birthstimeseries)
 birthstimeseriescomponents$seasonal # get the estimated values of the seasonal component
@@ -80,6 +82,7 @@ rainseriesforecasts$SSE
 HoltWinters(rainseries, beta=FALSE, gamma=FALSE, l.start=23.56)
 
 library("forecast")
+#error in code
 rainseriesforecasts2 <- forecast.HoltWinters(rainseriesforecasts, h=8)
 rainseriesforecasts2
 plot.forecast(rainseriesforecasts2)

@@ -9,6 +9,7 @@ summary(fit)
 women$weight
 
 coefficients(fit)
+
 fit$effects
 cor(fitted(fit), women$weight)
 fitted(fit)
@@ -86,9 +87,6 @@ pre <- predict(mod1) #
 segments(x, y, x, pre, col="red")
 library(calibrate)
 textxy(x, y, res, cx=0.7)
-# Difference Data Set; try the same thing
-x <- c(173, 169, 176, 166, 161, 164, 160, 158, 180, 187)
-y <- c(80, 68, 72, 75, 70, 65, 62, 60, 85, 92) # plot scatterplot and the regression line
 
 #Different Data
 x <- c(173, 169, 176, 166, 161, 164, 160, 158, 180, 187)

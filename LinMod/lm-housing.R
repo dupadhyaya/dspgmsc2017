@@ -1,9 +1,8 @@
+# Housing Rent on factors
 
+house = read.table("http://www.rossmanchance.com/iscam2/data/housing.txt", header = T, sep = "\t")
+house
 
-data(housing)
-housing
-house = read.table("http://www.rossmanchance.com/iscam2/data/housing.txt", header = T, 
-                   sep = "\t")
 attach(house)
 names(house)
 fit = lm(price ~ sqft + City + bedrooms + baths)
@@ -60,3 +59,4 @@ prd.PI = predict(sqftlm, newdata = data.frame(sqft = newX), interval = "predicti
                  level = 0.95)
 lines(newX, prd.PI[, 2], col = "green", lty = 3)
 lines(newX, prd.PI[, 3], col = "green", lty = 3)
+

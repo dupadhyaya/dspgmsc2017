@@ -1,5 +1,4 @@
 #ts9
-eg
 # save a numeric vector containing 72 monthly observations # from Jan 2009 to Dec 2014 as a time series object
 myvector = round(runif(6*12)*100,0)
 myvector

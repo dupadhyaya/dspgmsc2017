@@ -64,6 +64,7 @@ p
 
 
 #Word Cloud
+#library(wordcloud)
 set.seed(142)
 wordcloud(names(freq2), scale=c(2,0.5), freq2, min.freq=2)
 wordcloud(names(freq2), freq2,scale=c(2,0.5),  max.words=10)

@@ -1,10 +1,11 @@
 # TS Moving Averages 
-
+# Daily to Month to Yearly Averages
 # Section 1 ---------------------------------------------------------------
 
 
-x = 1:20
+(x = 1:20)
 # 3 Year and Past Data
+?filter  #Linear Filtering of TS
 mav <- function(x,n=3){filter(x,rep(1/n,n), sides=1)}
 mav(x)
 # First 2 values are NA (Previous Data)
@@ -79,7 +80,8 @@ x <- OcaEnOnaQts
 
 ## Daily to Monthly ts
 m <- daily2monthly(x, FUN=mean, na.rm=FALSE)
-
+x
+m
 # Plotting the monthly values
 plot(m, xlab="Time")
 
