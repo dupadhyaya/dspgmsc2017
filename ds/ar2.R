@@ -18,3 +18,4 @@ apply(scharray, c(1), sum)  # studentwise sum
 apply(scharray, c(2), sum)  # coursewise sum
 apply(scharray, c(3), sum) # schoolwise sum
 apply(scharray, c(2,3), sum) # Course vs School sum
+
