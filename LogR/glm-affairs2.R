@@ -26,8 +26,7 @@ mydata$ynaffair = factor(mydata$ynaffair,
 table(mydata$ynaffair)
 
 # ready for Log Regr
-fit.full = glm(ynaffair ~ gender + age + yearsmarried + children + religiousness
-               + education + occupation + rating, data=mydata, family=binomial())
+fit.full = glm(ynaffair ~ gender + age + yearsmarried + children + religiousness + education + occupation + rating, data=mydata, family=binomial())
 summary(fit.full)
 
 #Modified Model
@@ -72,3 +71,4 @@ fit.b = glm(ynaffair ~ age + yearsmarried + religiousness
 fit.qb= glm(ynaffair ~ age + yearsmarried + religiousness
                   + rating, data=mydata, family=quasibinomial())
 pchisq(summary(fit.qb)$dispersion * fit.b$df.residual, fit.b$df.residual, lower=F)
+

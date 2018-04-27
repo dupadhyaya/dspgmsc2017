@@ -4,7 +4,7 @@ cor(women)
 plot(women)  #par(mfrow=c(1,1))
 abline(lm(weight ~ height, data=women),col='red' )
 fit <- lm(weight ~ height, data=women)
-plot(fit)
+#plot(fit)
 summary(fit)
 women$weight
 

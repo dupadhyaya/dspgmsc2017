@@ -13,9 +13,9 @@ lubridate::dmy("04/06/2011")
 OlsonNames()
 Sys.timezone()
 Sys.timezone(location=F)
-arrive <- ymd_hms("2017-06-02 12:10:15", tz = "Asia/Calcutta")
+arrive <- ymd_hms("2018-04-27 18:40:15", tz = "Asia/Calcutta")
 arrive
-leave <- ymd_hms("2017-06-15 14:00:00", tz = "Asia/Calcutta")
+leave <- ymd_hms("2018-04-29 22:00:00", tz = "Asia/Calcutta")
 leave
 
 leave - arrive  # Time Difference
@@ -43,23 +43,37 @@ tz(arrive)
 
 #Time Intervals
 #save an interval of time as an Interval class object
-(udit <- interval(arrive, leave))
-(nakul <- arrive %--% leave)
-(friend = interval(ymd(20170705, tz = "Asia/Calcutta"),
-                   ymd(20170715, tz = "Asia/Calcutta")))
-#2017-07-05 IST--2017-07-15 IST
-(mypd = interval(ymd(20170702, tz = "Asia/Calcutta"),
-                 ymd(20170803, tz = "Asia/Calcutta")))
-#2017-07-02 IST--2017-08-03 IST
-int_overlaps(friend, mypd)
+(student1 <- interval(arrive, leave))
+(student2 <- arrive %--% leave)
+(student3 = interval(ymd(20180320, tz = "Asia/Calcutta"),
+                   ymd(20180327, tz = "Asia/Calcutta")))
+
+(courseperiod = interval(ymd(20180421, tz = "Asia/Calcutta"),
+                 ymd(20180425, tz = "Asia/Calcutta")))
+
+int_overlaps(student1, courseperiod)
 #TRUE
-setdiff(friend, mypd)
+int_overlaps(student3, courseperiod)
+
+setdiff(student2, courseperiod)
+setdiff(student3, courseperiod)
+
+?setdiff
 #2017-07-05 IST--2017-07-15 IST
+
 #Other Functions
 #int_start, int_end, int_flip, int_shift, int_aligns, union, intersect, and %within%.
+int_start(courseperiod)
+int_end(courseperiod)
+int_flip(courseperiod)
+int_aligns(student1, courseperiod)  #share end point
+
+dates = now() + days(1:10)
+dates
+int_diff(dates)
 
 # Years Betw ----------
-ref_date <- as.Date('06/01/08',format='%d/%m/%y')
+ref_date <- as.Date('20/04/08',format='%d/%m/%y')
 today <- as.Date(Sys.Date(), format='%d/%m/%y')
 year(arrive) = 2015
 arrive

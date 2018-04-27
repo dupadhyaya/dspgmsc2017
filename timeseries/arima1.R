@@ -4,10 +4,14 @@
 
 # Step 1: Plot tractor sales data as time series --------------------------
 
-data<-read.csv('Tractor-Sales.csv')
-str(data)
+data<-read.csv('./data/Tractor-Sales.csv')
+data = read.csv('http://ucanalytics.com/blogs/wp-content/uploads/2015/06/Tractor-Sales.csv')
+str(data)  #Factor and int values
 head(data)
-data<-ts(data[,2],start = c(2003,1),frequency = 12)
+#Jan-03 = c(2003,1)
+data = ts(data[,2],start = c(2003,1),frequency = 12)
+head(data)
+
 plot(data, xlab='Years', ylab = 'Tractor Sales')
 
 # Clearly the above chart has an upward trend for tractors sales and there is also a seasonal component 

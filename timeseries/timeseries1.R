@@ -115,3 +115,4 @@ acf(giftLogF48$residuals, lag.max=20, na.action = na.pass)
 
 Box.test(giftLogF48$residuals, lag=20, type='Ljung-Box')
 plot.ts(giftLogF48$residuals)
+
